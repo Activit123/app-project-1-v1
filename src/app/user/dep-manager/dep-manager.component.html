@@ -1,0 +1,122 @@
+<div class="container">
+  <!-- Menu -->
+  <div *ngIf="employeeDetails" class="menu">
+    <a *ngIf="employeeDetails.roles.includes('Employee')" [routerLink]="['/profile',employeeDetails.id]">Employee</a>
+    <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
+    <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>
+    <a *ngIf="employeeDetails.roles.includes('ProjectManager')" [routerLink]="['/project',employeeDetails.id]">Project Manager</a>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <div><strong>ID:</strong> {{ adminId }}</div>
+  <p>Department Management Page</p>
+
+  <button (click)="toggleDepartmentMembers()">Department Members</button>
+  <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
+  <button (click)="toggleManageSkills()">Manage Skills</button>
+  <div *ngIf="showDepartmentMembers">
+    <!-- List of department members -->
+    <!-- Assuming you have a list of department members -->
+    <ul>
+      <h3>Department Members</h3>
+      <li *ngFor="let employee of employees">"Employee:"{{employee.name}} <button (click)="removeMember(employee.id)">Remove Member</button>
+        
+        <ul style="list-style: none; padding: 0;">
+          <p>Department: {{employee.depId}}</p>
+          <h3>Skills</h3>
+          <li *ngFor="let skill of employee.skills" style="display: flex; justify-content: space-between; align-items: center;">
+            <div>:{{ skill.key }}: {{ skill.value }}   </div>
+          </li>
+        </ul>
+      </li>
+      <!-- Add more department members as needed -->
+    </ul>
+  </div>
+  <div *ngIf="showNotDepartmentMembers">
+    <!-- List of department members -->
+    <!-- Assuming you have a list of department members -->
+    <h3>Unassigned Department Employees</h3>
+    <ul>
+      
+      <li *ngFor="let employee of employeesNotAssigned">"Employee:"{{employee.name}}
+      
+        <p>Department: {{employee.depId}}</p>
+
+        <ul style="list-style: none; padding: 0;">
+          <h3>Skills</h3>
+          <li *ngFor="let skill of employee.skills" style="display: flex; justify-content: space-between; align-items: center;">
+            
+            <div>:{{ skill.key }}: {{ skill.value }}</div>
+          </li>
+          <button (click)="addMember(employee.id)">Add Member to Department</button>
+        </ul>
+     
+      </li>
+   
+      <!-- Add more department members as needed -->
+    </ul>
+  </div>
+  <div *ngIf="showManageSkills">
+    <!-- List of department members -->
+    <!-- Assuming you have a list of department members -->
+    <ul>
+      <h3>Department Skills</h3>
+      <input placeholder="Skill Name" [(ngModel)]="skillName" name="skillName">
+     <textarea id="description" name="description" [(ngModel)]="skillDescription"></textarea>
+      <input placeholder="Skill Name" [(ngModel)]="skillCategory" name="skillName">
+      <button (click)="addSkillToDepartment()">Add Skill to Department</button>
+       
+      <div>
+        <h2>Skills</h2>
+        <ul>
+          <li *ngFor="let skill of skills">
+            <strong>ID:</strong> {{ skill.id }}<br>
+            <strong>Name:</strong> {{ skill.name }}<br>
+            <input placeholder="New Skill Name" [(ngModel)]="newskillName" name="newskillName">
+            <strong>Description:</strong> {{ skill.description }}<br>
+            <textarea id="newdescription" name="newdescription" [(ngModel)]="newskillDescription"></textarea>
+            <strong>Author ID:</strong> {{ skill.authorID }}<br>
+            <strong>Category ID:</strong> {{ skill.categoryID }}<br>
+            <input placeholder="New Skill Category" [(ngModel)]="newskillCategory" name="newskillCategory">
+            <strong>Departments:</strong>
+            <ul>
+              <li *ngFor="let department of skill.departments">{{ department }}</li>
+            </ul>
+            <button (click)="updateSkillDepartment(skill.id)">Update Skill for Department</button>
+            <button (click)="deleteSkillDepartment(skill.id)">Delete Skill</button>
+          </li>
+        </ul>
+      </div>
+      
+    
+      <!-- Add more department members as needed -->
+    </ul>
+    <ul>
+      <h3>Other Department Skills</h3>
+      
+     
+       
+      <div>
+        <h2>Skills</h2>
+        <ul>
+          <li *ngFor="let skill of skillsFromOtherDeps">
+            <strong>ID:</strong> {{ skill.id }}<br>
+            <strong>Name:</strong> {{ skill.name }}<br>
+            <strong>Description:</strong> {{ skill.description }}<br>
+            <strong>Author ID:</strong> {{ skill.authorID }}<br>
+            <strong>Category ID:</strong> {{ skill.categoryID }}<br>
+            <strong>Departments:</strong>
+            <ul>
+              <li *ngFor="let department of skill.departments">{{ department }}</li>
+            </ul>
+            <button (click)="assignSkillToDepartment()">Add Skill to Department</button>
+          </li>
+        </ul>
+      </div>
+      
+        
+        
+    
+      <!-- Add more department members as needed -->
+    </ul>
+  </div>
+</div>

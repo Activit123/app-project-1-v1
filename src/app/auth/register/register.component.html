@@ -1,0 +1,24 @@
+<!-- organization-signup.component.html -->
+<div class="container">
+  <h2>Admin and Organization Signup</h2>
+  <label>{{ orgDetails}}</label>
+
+    <input type="text" [(ngModel)]="empName" placeholder="Name">
+    <input type="text" [(ngModel)]="empEmail" placeholder="email">
+    <input type="password" [(ngModel)]="empPassword" placeholder="password">
+    <input type="text" [(ngModel)]="orgName" placeholder="orgName">
+    <input type="text" [(ngModel)]="orgAddress" placeholder="orgAdrress">
+    
+    
+    <label>{{ message}}</label>
+    <button (click)="register()">Register</button>
+    <button (click)="login()">Go to Login Page</button>
+    
+
+  <!-- Label to display the response message -->
+  
+</div>
+  
+  
+
+  

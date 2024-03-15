@@ -1,0 +1,106 @@
+<div class="container">
+    <!-- Menu -->
+    <div *ngIf="employeeDetails" class="menu">
+      <a *ngIf="employeeDetails.roles.includes('Employee')" [routerLink]="['/profile',employeeDetails.id]">Employee</a>
+      <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
+      <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>
+      <a *ngIf="employeeDetails.roles.includes('ProjectManager')" [routerLink]="['/project',employeeDetails.id]">Project Manager</a>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <p>Project Manager Page</p>   
+    <div class="frm">
+      <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="project.name" required>
+      </div>
+      <div>
+        <label for="orgId">Organization ID:</label>
+        <input type="text" id="orgId" name="orgId" [(ngModel)]="project.orgId" required>
+      </div>
+      <div>
+        <label for="prPeriod">Project Period:</label>
+        <input type="text" id="prPeriod" name="prPeriod" [(ngModel)]="project.prPeriod" required>
+      </div>
+      <div>
+        <label for="startD">Start Date:</label>
+        <input type="date" id="startD" name="startD" [(ngModel)]="project.startD" required>
+      </div>
+      <div>
+        <label for="endD">End Date:</label>
+        <input type="date" id="endD" name="endD" [(ngModel)]="project.endD" required>
+      </div>
+      <div>
+        <label for="prStatus">Project Status:</label>
+        <input type="text" id="prStatus" name="prStatus" [(ngModel)]="project.prStatus" required>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" [(ngModel)]="project.description"></textarea>
+      </div>
+      <div>
+        <label>Custom Roles:</label>
+        <select id="roles" name="roles" [(ngModel)]="selectedRole">
+          <option *ngFor="let role of roles" [value]="role.name">{{ role.name}}</option>
+        </select>
+        <input type="text" id="cRole" name="cRole" [(ngModel)]="experience" placeholder="Experience">
+        <input type="number" id="level" name="level" [(ngModel)]="level" placeholder="Level">
+        <button (click)="addSkill()">Add Skill</button> <!-- Add button to add selected skill -->
+     
+      </div>
+      <div>
+        <label for="skills">Select Skill:</label>
+        <select id="skills" name="skills" [(ngModel)]="selectedSkill">
+          <option *ngFor="let skill of skills" [value]="skill.name">{{ skill.name }}</option>
+        </select>
+        <input type="number" id="experience" name="experience" [(ngModel)]="experience" placeholder="Experience">
+        <input type="number" id="level" name="level" [(ngModel)]="level" placeholder="Level">
+        <button (click)="addSkill()">Add Skill</button> <!-- Add button to add selected skill -->
+      </div>
+      <div>
+        <label>Skills:</label>
+        <ul>
+          <li *ngFor="let skillReq of project.skillRequirements">
+            {{ skillReq.key }} (Experience: {{ skillReq.value.experience }}, Level: {{ skillReq.value.level }})
+          </li>
+        </ul>
+      </div>
+      <button (click)="onSubmit()">Create Project</button>
+    </div>
+  </div>
+      
+<div><strong>ID:</strong> {{ adminId }}
+
+
+  
+</div>
+<div *ngIf="projectss">
+  <h2>Projects</h2>
+  <ul>
+    <li *ngFor="let project of projectss">
+      <p>ID: {{ project.id }}</p>
+      <p>Name: {{ project.name }}</p>
+      <p>Organization ID: {{ project.orgId }}</p>
+      <p>Project Period: {{ project.prPeriod }}</p>
+      <p>Start Date: {{ project.startD }}</p>
+      <p>End Date: {{ project.endD }}</p>
+      <p>Project Status: {{ project.prStatus }}</p>
+      <p>Description: {{ project.description }}</p>
+      <p>Project Manager ID: {{ project.projectManagerID }}</p>
+      <p>Custom Roles: 
+        <ul>
+          <li *ngFor="let role of project.customRoles">
+            Key: {{ role.key }},  Value: {{ role.value }}
+          </li>
+        </ul>
+      
+      <p>Skill Requirements: 
+        <ul>
+          <li *ngFor="let skill of project.skillRequirements">
+            Key: {{ skill.key }}, Value: {{ skill.value }}
+          </li>
+        </ul>
+      
+    </li>
+  </ul>
+</div>
+
