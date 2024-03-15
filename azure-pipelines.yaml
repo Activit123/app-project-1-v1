@@ -33,7 +33,7 @@ jobs:
       - task: ArchiveFiles@2
         displayName: 'Archive files'
         inputs:
-          rootFolderOrFile: '$(projectRoot)/dist/app-project-1/'
+          rootFolderOrFile: '$(projectRoot)/dist/app-project-1/browser/'
           includeRootFolder: false
           archiveType: zip
           archiveFile: $(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip
