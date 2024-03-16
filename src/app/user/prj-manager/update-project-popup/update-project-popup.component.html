@@ -5,6 +5,7 @@
       <!-- Add other input fields for other project details -->
      
       <div class="create-project-section">
+        <strong>ID:</strong> {{ managerId}}
         <strong>ID:</strong> {{ updatedProject.id}}
         <div>
           <label for="name">Name:</label>
@@ -28,6 +29,9 @@
           <select id="prStatus" [(ngModel)]="updatedProject.prStatus">
             <option value="Not Started">Not Started</option>
             <option value="Starting">Starting</option>
+            <option value="In Progress"> In Progress,</option>
+            <option value="Closing">Closing</option>
+            <option value="Starting">Closed</option>
           </select>
         </div>
         <div>
@@ -76,7 +80,8 @@
           </div>
         </div>
         <button (click)="update()">Update</button>
-        <button (click)="delete()">Delete</button>
+        <button (click)="openConfirmationDialog()">Delete</button>
+
         <button (click)="close()">Close</button>
       </div>
     </div>

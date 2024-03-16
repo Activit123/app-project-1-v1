@@ -29,5 +29,23 @@ export class ProjectService {
 
     return this.http.get<any>(`${this.apiUrl}/GetProjects?managerUserId=${managerUserId}`, httpOptions);
   }
+  updateProject(projectId: string, project: any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+  
+    return this.http.put<any>(`${this.apiUrl}/UpdateProject?projectId=${projectId}`,project);
+  }
+  deleteProject(projectId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.delete<any>(`${this.apiUrl}/DeleteProject?projectId=${projectId}`);
+  }
 }
 

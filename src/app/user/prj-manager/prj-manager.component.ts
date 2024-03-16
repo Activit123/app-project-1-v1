@@ -13,6 +13,7 @@ import { SkillService } from '../../../services/skillService/skill.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpdateProjectPopupComponent } from './update-project-popup/update-project-popup.component';
+import { TeamFinderPopupComponent } from './team-finder-popup/team-finder-popup.component';
 interface Project {
   id?: string;
   name?: string;
@@ -36,6 +37,19 @@ interface Project {
   styleUrl: './prj-manager.component.css'
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
+  openTeamFinderPopup(orgID:any,adminId: string, project: any): void {
+    if(orgID){
+      const dialogRef = this.dialog.open(TeamFinderPopupComponent, {
+        width: '300px', // Adjust width as needed
+        data: { adminId, project,orgID } // Pass adminId and project data
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        // Handle result if needed
+      });
+    }
+   
+  }
 deleteProject(_t160: any) {
 throw new Error('Method not implemented.');
 }
@@ -134,14 +148,22 @@ level: any;
 openUpdateProjectPopup(project: any,skills:any,roles:any) {
   this.viewSkills();
   this.fetchTeamRoles();
+  this.viewProjects();
   // Open the modal popup
   skills = this.skills;
   roles = this.roles;
+  const admin = this.adminId;
   const dialogRef = this.dialog.open(UpdateProjectPopupComponent, {
     width: '400px', // Adjust the width as needed
-    data: { project,skills,roles}
+    data: { project,skills,roles,admin}
    // Pass project data to the popup component
   });
+  dialogRef.afterClosed().subscribe(result => {
+    console.log("intra");
+    this.ngOnInit();
+  });
+  console.log("intra aici");
+ 
 }
 onSubmit() {
   console.log(this.project);
@@ -220,12 +242,12 @@ project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStat
             this.project.projectManagerID = this.employeeDetails.orgId;
            this.fetchTeamRoles();
            this.viewSkills();
-           
+           this.viewProjects();
            // console.log(this.deptName);
             //this.employeeDetails.depId = this.deptName;
 
         });
-        this.viewProjects();
+       
       }
     });
   }

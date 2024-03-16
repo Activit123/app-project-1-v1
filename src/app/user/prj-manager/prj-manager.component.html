@@ -104,6 +104,8 @@
       <p>Description: {{ project.description }}</p>
       <!-- Add Update and Delete buttons -->
       <button (click)="openUpdateProjectPopup(project,skills,roles)">Manage Projects</button>
+      <button (click)="openTeamFinderPopup(employeeDetails.orgId,adminId, project)">Open Team Finder</button>
+
      
     </div>
     <pagination-controls (pageChange)="onPageChange($event)" 

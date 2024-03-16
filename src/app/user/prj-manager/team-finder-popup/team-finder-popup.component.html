@@ -1,0 +1,49 @@
+<div class="modal-background">
+    <div class="modal-content tinder-match-popup">
+      <h2>Team Finder Filters</h2>
+      <div class="form-group">
+        <label for="includePartiallyAvailable">Include Partially Available:</label>
+        <select id="includePartiallyAvailable" [(ngModel)]="includePartiallyAvailable">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="weeksToProjectCompletion">Weeks to Project Completion:</label>
+        <select id="weeksToProjectCompletion" [(ngModel)]="weeksToProjectCompletion">
+          <option *ngFor="let week of weeksOptions" [value]="week">{{ week }}</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="includeUnavailable">Include Unavailable:</label>
+        <select id="includeUnavailable" [(ngModel)]="includeUnavailable">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="includeCloseToFinish">Include Close to Finish:</label>
+        <select id="includeCloseToFinish" [(ngModel)]="includeCloseToFinish">
+          <option value="true">Yes</option>
+          <option value="false">No</option>
+        </select>
+        
+      </div>
+    
+      <button (click)="findTeam()">Find Team</button>  <button class="close-button" (click)="closePopup()">Close</button>
+      <div class="employees-grid">
+        <h2>Employees</h2>
+        <div class="employee-card" *ngFor="let employee of employees">
+          <div>{{ employee.name }}</div>
+          
+          <button (click)="assignmentProposal(employee.id)">Team Member Proposal</button>
+        </div>
+      </div>
+      
+    </div>
+  
+    </div>
+ 
+    
+
+  

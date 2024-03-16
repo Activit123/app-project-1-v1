@@ -1,0 +1,8 @@
+<!-- confirmation-dialog.component.html -->
+<h1 mat-dialog-title>Confirmation</h1>
+<div mat-dialog-content>Are you sure you want to delete this project with ID {{ data.projectId }}?</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onConfirm()">Yes</button>
+  <button mat-button (click)="onCancel()">No</button>
+</div>
+
