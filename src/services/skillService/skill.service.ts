@@ -77,7 +77,7 @@ export class SkillService {
     return this.http.post<any>(url,null) // No request body needed since data is in URL
   }
   getUnendorsedSkills(managerID:string):Observable<any>{
-    const url = `${this.apiUrl}/GetUnendorsedSkills?&managerUserId=${managerID}`;
+    const url = `${this.apiUrl}/GetUnendorsedSkills?managerUserId=${managerID}`;
   
     return this.http.get<any>(url) // No request body needed since data is in URL
   }
