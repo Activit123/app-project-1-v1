@@ -1,5 +1,4 @@
 /* login.component.css */
-
 form {
     width: 300px;
     margin: 0 auto;
@@ -104,3 +103,33 @@ button:hover {
     transform: translate(-50%, -50%);
     /* Add other styles for padding, background, etc. */
 }
+
+/* Combined CSS for project details */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.project-item {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+}
+.create-project-section {
+    width: 300px;
+    border-radius: 20px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  }
+  
+  .create-project-section input,
+  .create-project-section select {
+    width: calc(100% - 42px); /* Subtract the padding and border width from 100% */
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  

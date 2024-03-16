@@ -14,7 +14,7 @@ input {
 
 button {
     width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
-    padding: 10px;
+    padding: 8px; /* Reduce padding to make buttons smaller */
     background-color: #007bff;
     color: white;
     border: none;
@@ -89,10 +89,59 @@ button:hover {
     background-color: #007bff; /* Change background color on hover */
     color: #fff; /* Change text color on hover */
 }
+
 .popup-content {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     /* Add other styles for padding, background, etc. */
-  }
+}
+
+/* Additional styles added */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.menu {
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.container p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+#departmentDetailsDiv ul,
+#teamRoleDetailsDiv ul,
+#employeeDetailsDiv ul {
+    padding: 0;
+}
+
+#departmentDetailsDiv li,
+#teamRoleDetailsDiv li,
+#employeeDetailsDiv li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ddd; /* Add border to list items */
+    padding: 10px; /* Add padding to list items */
+}
+
+#departmentDetailsDiv li button,
+#teamRoleDetailsDiv li button,
+#employeeDetailsDiv li button {
+    padding: 5px 10px; /* Reduce padding to make buttons smaller */
+}
+
+#departmentDetailsDiv li button:last-child,
+#teamRoleDetailsDiv li button:last-child,
+#employeeDetailsDiv li button:last-child {
+    margin-left: 10px;
+}

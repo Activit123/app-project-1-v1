@@ -15,58 +15,66 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './employee-register.component.html',
   styleUrl: './employee-register.component.css'
 })
-export class EmployeeRegisterComponent implements OnInit,OnDestroy {
-orgDetails: any;
-message: any;
-  constructor(private authService: AuthService,
+export class EmployeeRegisterComponent implements OnInit, OnDestroy {
+  orgDetails: any;
+  message: string = '';
+  orgName: string = '';
+  empName: string = '';
+  empEmail: string = '';
+  empPassword: string = '';
+  orgID:any;
+
+  private unsubscribe$ = new Subject<void>();
+
+  constructor(
+    private authService: AuthService,
     private empIdService: EmpIdService,
     private employeeDetailsService: EmployeeDetailsService,
-    private router: Router,private route: ActivatedRoute){}
-orgName:any;
-empName: any;
-empEmail: any;
-empPassword: any;
-orgID:any
-login() {
-  this.router.navigate(['/login']);
-}
-register() {
-  if(this.orgID){
-   this.authService.createEmployee(this.empName,this.empEmail,this.empPassword,this.orgID).subscribe(data=>{
-    console.log(data);
-    this.message = "Register Succesful";
-   },error=>{
-    console.log(error);
-    this.message = "Error on registration"
-   });
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
+
+  ngOnInit() {
+    this.route.paramMap
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe(params => {
+        this.orgID = params.get('orgId');
+        this.authService.getOrgName(this.orgID).subscribe(
+          (data: any) => {
+            this.orgName = data.name;
+          },
+          error => {
+            console.log(error);
+            this.orgName = 'Error';
+          }
+        );
+      });
   }
-}
-signupForm: any;
-private unsubscribe$ = new Subject<void>();
-ngOnInit() {
 
-  // Retrieve query parameters from the activated route
-  this.route.paramMap.
-  pipe(takeUntil(this.unsubscribe$)).
-  subscribe(params => {
-    console.log("intra");
-    this.orgID = params.get('orgId');
-    console.log(this.orgID);
-    this.authService.getOrgName(this.orgID).subscribe(data=>{
-      console.log(data);
-      this.orgName = JSON.parse(data);
-    },error=>{
-      console.log(error);
-    })
-    
-  });
+  ngOnDestroy() {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
 
-  // Subscribe to changes in employeeDetails 
-}
+  login() {
+    this.router.navigate(['/login']);
+  }
 
-ngOnDestroy(){
-  // Unsubscribe from the subscription to avoid memory leaks
-  this.unsubscribe$.next();
-  this.unsubscribe$.complete();
-}
+  register() {
+    if (this.orgID) {
+      this.authService
+        .createEmployee(this.empName, this.empEmail, this.empPassword, this.orgID)
+        .subscribe(
+          data => {
+            console.log(data);
+            this.message = 'Registration successful';
+            this.router.navigate(['/login']);
+          },
+          error => {
+            console.log(error);
+            this.message = 'Error on registration';
+          }
+        );
+    }
+  }
 }

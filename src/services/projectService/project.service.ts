@@ -1,20 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
-interface Project {
-  id?: string;
-  name?: string;
-  orgId?: string;
-  prPeriod?: string;
-  StartD?: string;
-  EndD?: string;
-  PrStatus?: string;
-  description?: string;
-  TehStack?: string[];
-  projectManagerID?: string;
-  customRoles?: { key: string; value: string }[];
-  skillRequirements?: { key: string; value: string }[];
-}
+
 
 @Injectable({
   providedIn: 'root'

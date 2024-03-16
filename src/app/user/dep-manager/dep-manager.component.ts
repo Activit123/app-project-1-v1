@@ -26,8 +26,16 @@ getSkillsFromOtherDeps(){
    
    });
 }
-assignSkillToDepartment() {
-throw new Error('Method not implemented.');
+assignSkillToDepartment(skillID:any) {
+  if(skillID){
+    this.skillService.assignSkillToDep(this.adminId,skillID).subscribe(data=>{
+      console.log(data);
+    },error=>{
+      console.log(error);
+    });
+    
+  }
+   
 }
 deleteSkillDepartment(skillID: any) {
   this.skillService.deleteSkillDep(this.adminId,skillID).subscribe(data=>{

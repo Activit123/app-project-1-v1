@@ -1,37 +1,96 @@
-<div class="container">
+<div id="login">
+  <!-- Backgrounds -->
+  <div class="backgrounds">
+    <div class="bg-main"></div>
+    <div class="bg-1"></div>
+    <div class="bg-2"></div>
+  </div>
+  <!-- End of Backgrounds -->
+  <div class="container">
     <!-- Menu -->
     <div *ngIf="employeeDetails" class="menu">
-      <a *ngIf="employeeDetails.roles.includes('Employee')" routerLink="/employee">Employee</a>
-      <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/organization', { empId: employeeDetails.id }]">Organization Admin</a>
-      <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" routerLink="/department">Department Manager</a>
-      <a *ngIf="employeeDetails.roles.includes('ProjectManager')" routerLink="/project">Project Manager</a>
+      <a
+        *ngIf="employeeDetails.roles.includes('Employee')"
+        routerLink="/employee"
+        >Employee</a
+      >
+      <a
+        *ngIf="employeeDetails.roles.includes('OrganizationAdmin')"
+        [routerLink]="['/organization', { empId: employeeDetails.id }]"
+        >Organization Admin</a
+      >
+      <a
+        *ngIf="employeeDetails.roles.includes('DepartmentManager')"
+        routerLink="/department"
+        >Department Manager</a
+      >
+      <a
+        *ngIf="employeeDetails.roles.includes('ProjectManager')"
+        routerLink="/project"
+        >Project Manager</a
+      >
       <button (click)="logout()">Logout</button>
     </div>
-  
+
     <!-- Login form -->
-    <div class="login" *ngIf="!isLoggedIn">
-      <p >Login</p>
-      <form (ngSubmit)="onSubmit()">
-        <input type="email" placeholder="Email" [(ngModel)]="email" name="email" required>
-        <input type="password" placeholder="Password" [(ngModel)]="password" name="password" required>
-        <button type="submit">Login</button>
-        <button (click)="register()">Register</button>
-      </form>
-      <div *ngIf="message" class="error-message">{{ message }}</div>
-      
+    <link
+      href="https://fonts.googleapis.com/css2?family=Croissant+One&family=Mooli&family=Mukta:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0"
+    />
+    <!-- Banner -->
+    <div class="banner">
+      <h1>TeamFinder</h1>
+      <h3>Find your best team</h3>
     </div>
-  
+    <!-- End of Banner -->
+    <!-- Account -->
+    <section class="account">
+      <div class="account-wrapper">
+        <div class="account-circle"></div>
+        <div class="account-form-wrapper">
+          <span class="material-symbols-rounded"> person_check </span>
+          <form class="account-inputs" (ngSubmit)="onSubmit()">
+            <input
+              type="email"
+              placeholder="Email"
+              [(ngModel)]="email"
+              name="email"
+              required
+            />
+            <input
+              type="password"
+              placeholder="Password"
+              [(ngModel)]="password"
+              name="password"
+              required
+            />
+            <button type="submit">Login</button>
+            <button (click)="register()">Register</button>
+          </form>
+          <div *ngIf="message" class="error-message">{{ message }}</div>
+        </div>
+        <!-- <button type="button" class="btn-out">Register</button> -->
+      </div>
+    </section>
+    <!-- End of Account -->
+
     <!-- Profile details -->
     <div *ngIf="isLoggedIn && employeeDetails" class="profile-details">
       <p><strong>Name:</strong> {{ employeeDetails.name }}</p>
       <p><strong>Email:</strong> {{ employeeDetails.email }}</p>
-      <p><strong>Roles:</strong> {{ employeeDetails.roles.join(', ') }}</p>
+      <p><strong>Roles:</strong> {{ employeeDetails.roles.join(", ") }}</p>
       <p><strong>Organization ID:</strong> {{ employeeDetails.orgId }}</p>
       <p><strong>Department ID:</strong> {{ employeeDetails.depId }}</p>
       <p><strong>Skills:</strong></p>
       <ul>
-        <li *ngFor="let skill of employeeDetails.skills">{{ skill.key }}: {{ skill.value }}</li>
+        <li *ngFor="let skill of employeeDetails.skills">
+          {{ skill.key }}: {{ skill.value }}
+        </li>
       </ul>
     </div>
   </div>
-  
+</div>

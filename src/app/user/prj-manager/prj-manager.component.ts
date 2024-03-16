@@ -10,6 +10,9 @@ import { Subject, takeUntil } from 'rxjs';
 import { ProjectService } from '../../../services/projectService/project.service';
 import { RolesService } from '../../../services/roleService/roles.service';
 import { SkillService } from '../../../services/skillService/skill.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UpdateProjectPopupComponent } from './update-project-popup/update-project-popup.component';
 interface Project {
   id?: string;
   name?: string;
@@ -28,13 +31,80 @@ interface Project {
 @Component({
   selector: 'app-prj-manager',
   standalone: true,
-  imports: [NgIf, CommonModule, RouterLink, SkillsComponent,FormsModule,MatInputModule,MatDatepickerModule],
+  imports: [NgIf, CommonModule, RouterLink, SkillsComponent,FormsModule,MatInputModule,MatDatepickerModule,NgxPaginationModule,MatDialogModule],
   templateUrl: './prj-manager.component.html',
   styleUrl: './prj-manager.component.css'
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
+deleteProject(_t160: any) {
+throw new Error('Method not implemented.');
+}
+updateProject(_t160: any) {
+throw new Error('Method not implemented.');
+}
+  pagedProjects: any[] = [];
+currentPage: number = 1; // Current page number
+itemsPerPage: number = 10; // Number of items per page
+onPageChange(pageNumber: number) {
+  this.setPage(pageNumber);
+}
+setPage(pageNumber: number) {
+  // Ensure the requested page number is within valid bounds
+  if (pageNumber < 1 || pageNumber > Math.ceil(this.projectss.length / this.itemsPerPage)) {
+    return;
+  }
+
+  this.currentPage = pageNumber;
+  // Calculate start and end index of items for the selected page
+  const startIndex = (pageNumber - 1) * this.itemsPerPage;
+  const endIndex = Math.min(startIndex + this.itemsPerPage - 1, this.projectss.length - 1);
+  // Slice the projects array to get the items for the selected page
+  this.pagedProjects = this.projectss.slice(startIndex, endIndex + 1);
+}
+projectName = "";
+projectPeriod ="";
+projectStatus ="";
+projectDescription=""
+techStack = "";
+
+toggleProjectDetails() {
+this.showProjectDetails = !this.showProjectDetails;
+}
+showCreateProject=false;
+showProjectDetails=false;
+toggleCreateProject() {
+this.showCreateProject = !this.showCreateProject;
+}
+roleNumber: any;
+addSkillRequirement() {
+  const exists = this.yourData.addedSkills.some(skill => skill.key === this.selectedSkill);
+  
+  // If the skill doesn't exist, add it to the array
+  if (!exists) {
+    this.yourData.addedSkills.push({ key: this.selectedSkill, value: this.level });
+  }
+}
+removeSkillRequirement(_t118: number) {
+throw new Error('Method not implemented.');
+}
+addCustomRole() {
+  const exists = this.yourData.addedRoles.some(role => role.key === this.selectedRole);
+  
+  // If the role doesn't exist, add it to the array
+  if (!exists) {
+    this.yourData.addedRoles.push({ key: this.selectedRole, value: this.roleNumber });
+  }
+}
+removeCustomRole(_t95: number) {
+throw new Error('Method not implemented.');
+}
   projects: any;
-projectss: any;
+projectss: any[] = [];
+;
+customRole: any;
+number: any;
+selectedPeriod: any;
+selectedStatus: any;
 
   convertDatesToText() {
     // Convert start date to text format
@@ -51,15 +121,31 @@ selectedRole: any;
   formattedStartDate!: string;
   formattedEndDate!: string;
 roles:any;
-addedRoles: string[] = [];
+ yourData = {
+  addedRoles: [] as { key: string, value: string }[],
+  addedSkills: [] as { key: string, value: string}[]
+};
+//addedRoles: any[] = [];
+//addedSkills: any[] = [];
 selectedSkill: any;
 skills: any;
 experience: any;
 level: any;
-
+openUpdateProjectPopup(project: any,skills:any,roles:any) {
+  this.viewSkills();
+  this.fetchTeamRoles();
+  // Open the modal popup
+  skills = this.skills;
+  roles = this.roles;
+  const dialogRef = this.dialog.open(UpdateProjectPopupComponent, {
+    width: '400px', // Adjust the width as needed
+    data: { project,skills,roles}
+   // Pass project data to the popup component
+  });
+}
 onSubmit() {
   console.log(this.project);
-  this.project.customRoles = this.addedRoles;
+ // this.project.customRoles = this.addedRoles;
   this.convertDatesToText();
   const prjj = this.projectss[0];
 
@@ -81,18 +167,44 @@ addSkill() {
 }
 
 addRole() {
-  if (this.selectedRole && !this.project.customRoles.includes(this.selectedRole)) {
+  if (this.selectedRole) {
     this.project.customRoles.push({key:this.selectedRole,value:2}); // Push selected role to customRoles array
   }
 }
+employeeDetails: any = "";
+
 project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStatus: '', description: '', projectManagerID: '', customRoles: [], skillRequirements: [] }; // Initialize project object with empty values
-  constructor(private route:ActivatedRoute,private router:Router, private authService:AuthService,private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
+  constructor(private dialog: MatDialog,private route:ActivatedRoute,private router:Router, private authService:AuthService,private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
 
   }
-  employeeDetails: any;
+
   adminId: any ;
   private unsubscribe$ = new Subject<void>();
-
+  createProject() {
+    const projec = {
+      "id": "string",
+      "name": this.projectName,
+      "orgId": this.employeeDetails.orgId,
+      "prPeriod": this.projectPeriod,
+      "startD": this.startDate,
+      "endD": this.endDate,
+      "prStatus": this.projectStatus,
+      "description": this.projectDescription,
+      "tehStack": [
+        this.techStack
+      ],
+      "projectManagerID": this.employeeDetails.id,
+      "customRoles": this.yourData.addedRoles,
+      "skillRequirements": this.yourData.addedSkills
+    }
+    console.log(projec);
+    this.projectService.createProject(this.adminId,projec).subscribe(data=>{
+      console.log(data);
+      this.viewProjects();
+    },error=>{
+      console.log(error);
+    })
+  }
   ngOnInit(): void {
     console.log("intra aici");
     this.route.paramMap.pipe(takeUntil(this.unsubscribe$)).
@@ -113,15 +225,19 @@ project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStat
             //this.employeeDetails.depId = this.deptName;
 
         });
-        this.projectService.getProjects(this.adminId)
+        this.viewProjects();
+      }
+    });
+  }
+  viewProjects(){
+    this.projectService.getProjects(this.adminId)
       .subscribe(data=> {
         this.projectss = data;
+        this.setPage(this.currentPage);
       }, error => {
         console.error('Error fetching projects:', error);
         // Handle error as needed
       });
-      }
-    });
   }
   viewSkills(): void{
    // Toggle visibility on click

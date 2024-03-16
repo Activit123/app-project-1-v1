@@ -1,106 +1,120 @@
+<!-- HTML Template -->
 <div class="container">
-    <!-- Menu -->
-    <div *ngIf="employeeDetails" class="menu">
-      <a *ngIf="employeeDetails.roles.includes('Employee')" [routerLink]="['/profile',employeeDetails.id]">Employee</a>
-      <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
-      <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>
-      <a *ngIf="employeeDetails.roles.includes('ProjectManager')" [routerLink]="['/project',employeeDetails.id]">Project Manager</a>
-      <button (click)="logout()">Logout</button>
-    </div>
-    <p>Project Manager Page</p>   
-    <div class="frm">
-      <div>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" [(ngModel)]="project.name" required>
-      </div>
-      <div>
-        <label for="orgId">Organization ID:</label>
-        <input type="text" id="orgId" name="orgId" [(ngModel)]="project.orgId" required>
-      </div>
-      <div>
-        <label for="prPeriod">Project Period:</label>
-        <input type="text" id="prPeriod" name="prPeriod" [(ngModel)]="project.prPeriod" required>
-      </div>
-      <div>
-        <label for="startD">Start Date:</label>
-        <input type="date" id="startD" name="startD" [(ngModel)]="project.startD" required>
-      </div>
-      <div>
-        <label for="endD">End Date:</label>
-        <input type="date" id="endD" name="endD" [(ngModel)]="project.endD" required>
-      </div>
-      <div>
-        <label for="prStatus">Project Status:</label>
-        <input type="text" id="prStatus" name="prStatus" [(ngModel)]="project.prStatus" required>
-      </div>
-      <div>
-        <label for="description">Description:</label>
-        <textarea id="description" name="description" [(ngModel)]="project.description"></textarea>
-      </div>
-      <div>
-        <label>Custom Roles:</label>
-        <select id="roles" name="roles" [(ngModel)]="selectedRole">
-          <option *ngFor="let role of roles" [value]="role.name">{{ role.name}}</option>
-        </select>
-        <input type="text" id="cRole" name="cRole" [(ngModel)]="experience" placeholder="Experience">
-        <input type="number" id="level" name="level" [(ngModel)]="level" placeholder="Level">
-        <button (click)="addSkill()">Add Skill</button> <!-- Add button to add selected skill -->
-     
-      </div>
-      <div>
-        <label for="skills">Select Skill:</label>
-        <select id="skills" name="skills" [(ngModel)]="selectedSkill">
-          <option *ngFor="let skill of skills" [value]="skill.name">{{ skill.name }}</option>
-        </select>
-        <input type="number" id="experience" name="experience" [(ngModel)]="experience" placeholder="Experience">
-        <input type="number" id="level" name="level" [(ngModel)]="level" placeholder="Level">
-        <button (click)="addSkill()">Add Skill</button> <!-- Add button to add selected skill -->
-      </div>
-      <div>
-        <label>Skills:</label>
-        <ul>
-          <li *ngFor="let skillReq of project.skillRequirements">
-            {{ skillReq.key }} (Experience: {{ skillReq.value.experience }}, Level: {{ skillReq.value.level }})
-          </li>
-        </ul>
-      </div>
-      <button (click)="onSubmit()">Create Project</button>
+  <!-- Menu -->
+  <div *ngIf="employeeDetails" class="menu">
+    <a *ngIf="employeeDetails.roles.includes('Employee')" [routerLink]="['/profile',employeeDetails.id]">Employee</a>
+    <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
+    <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>
+    <a *ngIf="employeeDetails.roles.includes('ProjectManager')" [routerLink]="['/project',employeeDetails.id]">Project Manager</a>
+    <button (click)="logout()">Logout</button>
+  </div>
+  <button (click)="toggleCreateProject()">Toggle Create Project</button>
+  <button (click)="toggleProjectDetails()">Toggle Project Details</button>
+<!-- Updated HTML -->
+<div *ngIf="showCreateProject" class="create-project-section">
+  <strong>ID:</strong> {{ adminId }}
+  <div>
+    <label for="name">Name:</label>
+    <input type="text" id="name" [(ngModel)]="projectName">
+  </div>
+  <div>
+    <label for="prPeriod">Project Period:</label>
+    <select id="prPeriod" [(ngModel)]="projectPeriod">
+      <option value="Fixed">Fixed</option>
+      <option value="Ongoing">Ongoing</option>
+    </select>
+  </div>
+  <div class="input-group">
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" [(ngModel)]="startDate">
+    <label for="endDate">End Date:</label>
+    <input type="date" id="endDate" name="endDate" [(ngModel)]="endDate">
+  </div>
+  <div>
+    <label for="prStatus">Project Status:</label>
+    <select id="prStatus" [(ngModel)]="projectStatus">
+      <option value="Not Started">Not Started</option>
+      <option value="Starting">Starting</option>
+    </select>
+  </div>
+  <div>
+    <label for="description">Description:</label>
+    <input type="text" id="description" [(ngModel)]="projectDescription">
+  </div>
+  <div>
+    <label for="tehStack">Tech Stack:</label>
+    <input type="text" id="tehStack" [(ngModel)]="techStack">
+  </div>
+  <div>
+    <label for="customRoles">Custom Roles:</label>
+    <div class="input-group">
+      <select id="roles" name="roles" [(ngModel)]="selectedRole">
+        <option *ngFor="let role of roles" [value]="role.name">{{ role.name}}</option>
+      </select>
+      <input type="text" [(ngModel)]="roleNumber" placeholder="Value">
+      <button (click)="addCustomRole()">Add Custom Role</button>
+      <label>Added Roles:</label>
+      <ul>
+        <li *ngFor="let role of yourData.addedRoles">{{ role.key }} - {{ role.value }}</li>
+      </ul>
     </div>
   </div>
+  <div>
+    <label for="skillRequirements">Skill Requirements:</label>
+    <div class="input-group">
+      <select id="skills" name="skills" [(ngModel)]="selectedSkill">
+        <option *ngFor="let skill of skills" [value]="skill.id">{{ skill.name }}</option>
+      </select>
+      <div>
+        <label for="level">Level:</label>
+        <select id="level" [(ngModel)]="level">
+          <option value="1">1 - Learns</option>
+          <option value="2">2 - Knows</option>
+          <option value="3">3 - Does</option>
+          <option value="4">4 - Helps</option>
+          <option value="5">5 - Teaches</option>
+        </select>
+      </div>
       
-<div><strong>ID:</strong> {{ adminId }}
-
-
-  
+      <input type="text" [(ngModel)]="experience" placeholder="Experience">
+      <button (click)="addSkillRequirement()">Add Skill Requirement</button>
+      <label>Added Skills:</label>
+      <ul>
+        <li *ngFor="let skill of yourData.addedSkills">{{ skill.key }} - {{ skill.value }}</li>
+      </ul>
+    </div>
+  </div>
+  <button (click)="createProject()">Create Project</button>
 </div>
-<div *ngIf="projectss">
-  <h2>Projects</h2>
-  <ul>
-    <li *ngFor="let project of projectss">
-      <p>ID: {{ project.id }}</p>
-      <p>Name: {{ project.name }}</p>
-      <p>Organization ID: {{ project.orgId }}</p>
+
+
+
+ 
+
+<div *ngIf="showProjectDetails">
+  <!-- Project Details Section -->
+  <div *ngIf="projectss" class="projects-grid">
+    <h2>Projects</h2>
+    <div class="project-item" *ngFor="let project of pagedProjects">
+      <h3>Name: {{ project.name }}</h3>
       <p>Project Period: {{ project.prPeriod }}</p>
       <p>Start Date: {{ project.startD }}</p>
       <p>End Date: {{ project.endD }}</p>
       <p>Project Status: {{ project.prStatus }}</p>
       <p>Description: {{ project.description }}</p>
-      <p>Project Manager ID: {{ project.projectManagerID }}</p>
-      <p>Custom Roles: 
-        <ul>
-          <li *ngFor="let role of project.customRoles">
-            Key: {{ role.key }},  Value: {{ role.value }}
-          </li>
-        </ul>
-      
-      <p>Skill Requirements: 
-        <ul>
-          <li *ngFor="let skill of project.skillRequirements">
-            Key: {{ skill.key }}, Value: {{ skill.value }}
-          </li>
-        </ul>
-      
-    </li>
-  </ul>
+      <!-- Add Update and Delete buttons -->
+      <button (click)="openUpdateProjectPopup(project,skills,roles)">Manage Projects</button>
+     
+    </div>
+    <pagination-controls (pageChange)="onPageChange($event)" 
+                         class="my-pagination" 
+                         previousLabel="Previous"
+                         nextLabel="Next">
+    </pagination-controls>
+  </div>
 </div>
 
+
+
+
+</div>

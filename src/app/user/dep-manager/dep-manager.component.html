@@ -108,7 +108,7 @@
             <ul>
               <li *ngFor="let department of skill.departments">{{ department }}</li>
             </ul>
-            <button (click)="assignSkillToDepartment()">Add Skill to Department</button>
+            <button (click)="assignSkillToDepartment(skill.id)">Add Skill to Department</button>
           </li>
         </ul>
       </div>
