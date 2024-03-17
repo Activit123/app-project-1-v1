@@ -132,4 +132,16 @@ button:hover {
     padding: 10px;
     margin-bottom: 10px;
   }
+  .card {
+    /* Other card styles */
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    justify-content: space-between; /* Distribute space between items */
+    height: auto; /* Allow the card to grow vertically */
+    padding: 10px;
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
   

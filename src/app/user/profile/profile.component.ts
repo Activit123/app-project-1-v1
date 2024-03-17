@@ -102,7 +102,7 @@ isNavigating = false;
   }
   takeAllskills(){
     if (this.employeeDetails.id) {
-      this.skillService.getAllSkills(this.employeeDetails.id)
+      this.skillService.getAllSkills(this.employeeDetails.orgId)
       .subscribe((data: any) => {
         // Assuming data is an array of skills
         console.log("intra");

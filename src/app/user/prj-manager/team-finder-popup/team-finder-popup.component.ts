@@ -78,6 +78,7 @@ findTeam() {
       },error=>{
         console.log(error);
       });
+      console.log("iese");
 }
   includePartiallyAvailable: boolean = false;
   weeksToProjectCompletion: number = 0;

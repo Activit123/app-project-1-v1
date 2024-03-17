@@ -10,6 +10,8 @@
   </div>
   <button (click)="toggleCreateProject()">Toggle Create Project</button>
   <button (click)="toggleProjectDetails()">Toggle Project Details</button>
+  <button (click)="toggleAssignmentProposals()">Toggle Assignment Proposals</button>
+
 <!-- Updated HTML -->
 <div *ngIf="showCreateProject" class="create-project-section">
   <strong>ID:</strong> {{ adminId }}
@@ -89,20 +91,51 @@
 
 
 
- 
+<div *ngIf="showAssignmentProposals">
+  <!-- Display assignment proposals -->
+  <h3>Assignment Proposals</h3>
+  <div class="assignment-proposals">
+    <!-- Display assignment proposals as cards -->
+    <div class="card" *ngFor="let proposal of assignmentProposals">
+      <!-- Proposal details -->
+      <h4>{{ proposal.userID }}</h4>
+      <p>{{ proposal.projectID }}</p>
+      <p>{{ proposal.workHours }}</p>
+      <p>{{ proposal.comment }}</p>
+      <button (click)="confirmProposal(proposal)">Confirm</button>
+    </div>
+  </div>
+</div>
+
 
 <div *ngIf="showProjectDetails">
   <!-- Project Details Section -->
   <div *ngIf="projectss" class="projects-grid">
     <h2>Projects</h2>
     <div class="project-item" *ngFor="let project of pagedProjects">
+      <h3>Name: {{ project.id }}</h3>
       <h3>Name: {{ project.name }}</h3>
       <p>Project Period: {{ project.prPeriod }}</p>
       <p>Start Date: {{ project.startD }}</p>
       <p>End Date: {{ project.endD }}</p>
       <p>Project Status: {{ project.prStatus }}</p>
       <p>Description: {{ project.description }}</p>
+      <button (click)="toggleProjectTeam()">Toggle Project Team</button>
       <!-- Add Update and Delete buttons -->
+      <div *ngIf="showProjectTeam">
+        <!-- Display project team -->
+        <h3>Project Team</h3>
+        <button (click)="createTeam()">Manage Projects</button>
+        <div class="project-team">
+          <!-- Display project team members -->
+          <div class="team-member" *ngFor="let member of projectTeam">
+            <!-- Member details -->
+            <h4>{{ member.name }}</h4>
+            <p>{{ member.role }}</p>
+            <!-- Add more details as needed -->
+          </div>
+        </div>
+      </div>
       <button (click)="openUpdateProjectPopup(project,skills,roles)">Manage Projects</button>
       <button (click)="openTeamFinderPopup(employeeDetails.orgId,adminId, project)">Open Team Finder</button>
 

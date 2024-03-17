@@ -37,6 +37,22 @@ interface Project {
   styleUrl: './prj-manager.component.css'
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
+createTeam() {
+
+}
+assignmentProposals: any;
+showProjectTeam: any;
+projectTeam: any;
+showAssignmentProposals: any;
+confirmProposal(_t160: any) {
+throw new Error('Method not implemented.');
+}
+toggleProjectTeam() {
+this.showProjectTeam = !this.showProjectTeam;
+}
+toggleAssignmentProposals() {
+this.showAssignmentProposals = !this.showAssignmentProposals;
+}
   openTeamFinderPopup(orgID:any,adminId: string, project: any): void {
     if(orgID){
       const dialogRef = this.dialog.open(TeamFinderPopupComponent, {
@@ -264,7 +280,7 @@ project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStat
   viewSkills(): void{
    // Toggle visibility on click
     if (this.employeeDetails.id) {
-      this.skillService.getAllSkills(this.employeeDetails.id)
+      this.skillService.getAllSkills(this.employeeDetails.orgId)
       .subscribe((data: any) => {
         // Assuming data is an array of skills
         console.log("intra");
