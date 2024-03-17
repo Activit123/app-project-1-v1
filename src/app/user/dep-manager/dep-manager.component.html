@@ -12,6 +12,7 @@
 
   <button (click)="toggleDepartmentMembers()">Department Members</button>
   <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
+  <button (click)="toggleAssignmentProposals()">Assignment Proposals</button>
   <button (click)="toggleManageSkills()">Manage Skills</button>
   <div *ngIf="showDepartmentMembers">
     <!-- List of department members -->
@@ -55,37 +56,72 @@
       <!-- Add more department members as needed -->
     </ul>
   </div>
+    <!-- Assignment Proposals Section -->
+    <div *ngIf="showAssignmentProposals">
+      <h3>Assignment Proposals</h3>
+      <!-- Display assignment proposals as cards -->
+      <div class="assignment-proposals">
+        <div class="card" *ngFor="let proposal of assignmentProposals">
+          <!-- Customize card layout to display proposal details -->
+          <h4>Employee:{{ proposal.userID }}</h4>
+          <p>Project:{{ proposal.projectID }}</p>
+          <p>Work Hours{{ proposal.workHours }}</p>
+          <p>Reason:{{ proposal.comment }}</p>
+          <p>Roles:</p>
+          <ul>
+            <li *ngFor="let roles of proposal.customRoles ">{{roles}}</li>
+          </ul>
+          <!-- Add more details as needed -->
+          <label>Reason</label>
+          <input placeholder="Comment" [(ngModel)]="comment" name="comment">
+          <p>Confirm or deny</p>
+          <select [(ngModel)]="type" name="confirmation">
+
+            <option value="true">Confirm</option>
+            <option value="false">Reject</option>
+          </select>
+          <button (click)="confirmProposal(proposal,type,comment)">Confirm</button>
+        </div>
+       
+      </div>
+    </div>
   <div *ngIf="showManageSkills">
     <!-- List of department members -->
     <!-- Assuming you have a list of department members -->
     <ul>
+      <div>
+        <input placeholder="Skill Name" [(ngModel)]="skillCategoryy" name="skillName">
+        <button (click)="addSkillCategory()">Add Skill Category</button>
+        
+      </div>
       <h3>Department Skills</h3>
+      <label>Description</label>
       <input placeholder="Skill Name" [(ngModel)]="skillName" name="skillName">
      <textarea id="description" name="description" [(ngModel)]="skillDescription"></textarea>
-      <input placeholder="Skill Name" [(ngModel)]="skillCategory" name="skillName">
+     <label>Select Skill Category</label>
+     <select [(ngModel)]="selectedSkillCategory" name="skillCategory">
+      <option value="" disabled selected>Select Skill Category</option>
+      <option *ngFor="let category of skillCategories" [ngValue]="category">{{ category.name }}</option>
+    </select>
       <button (click)="addSkillToDepartment()">Add Skill to Department</button>
-       
-      <div>
-        <h2>Skills</h2>
-        <ul>
-          <li *ngFor="let skill of skills">
-            <strong>ID:</strong> {{ skill.id }}<br>
-            <strong>Name:</strong> {{ skill.name }}<br>
-            <input placeholder="New Skill Name" [(ngModel)]="newskillName" name="newskillName">
-            <strong>Description:</strong> {{ skill.description }}<br>
-            <textarea id="newdescription" name="newdescription" [(ngModel)]="newskillDescription"></textarea>
-            <strong>Author ID:</strong> {{ skill.authorID }}<br>
-            <strong>Category ID:</strong> {{ skill.categoryID }}<br>
-            <input placeholder="New Skill Category" [(ngModel)]="newskillCategory" name="newskillCategory">
-            <strong>Departments:</strong>
-            <ul>
-              <li *ngFor="let department of skill.departments">{{ department }}</li>
-            </ul>
-            <button (click)="updateSkillDepartment(skill.id)">Update Skill for Department</button>
-            <button (click)="deleteSkillDepartment(skill.id)">Delete Skill</button>
-          </li>
-        </ul>
+       <div class="skill-card-container">
+      <div class="skill-card" *ngFor="let skill of skills">
+        <h4>Skill name:{{ skill.name }}</h4>
+        <p>Description:{{ skill.description }}</p>
+        <p>Category:{{ skill.categoryID }}</p>
+        <input placeholder="New Skill Name" [(ngModel)]="newskillName" name="newSkillName">
+        <textarea placeholder="New Skill Description" [(ngModel)]="newskillDescription" name="newSkillDescription"></textarea>
+        <select [(ngModel)]="selectedSkillCategoryUpdate" name="skillCategory">
+          <option value="" disabled selected>Select Skill Category</option>
+          <option *ngFor="let category of skillCategories" [ngValue]="category">{{ category.name }}</option>
+        </select>
+        <!-- Add more details as needed -->
+        <button (click)="updateSkillDepartment(skill.id)">Update Skill for Department</button>
+        <button (click)="deleteSkillDepartment(skill.id)">Delete Skill</button>
       </div>
+    </div>
+     
+  
       
     
       <!-- Add more department members as needed -->
@@ -94,24 +130,23 @@
       <h3>Other Department Skills</h3>
       
      
-       
-      <div>
+      <div class="skill-card-container">
+        <div class="skill-card" *ngFor="let skill of skills">
+      
         <h2>Skills</h2>
         <ul>
           <li *ngFor="let skill of skillsFromOtherDeps">
-            <strong>ID:</strong> {{ skill.id }}<br>
-            <strong>Name:</strong> {{ skill.name }}<br>
-            <strong>Description:</strong> {{ skill.description }}<br>
-            <strong>Author ID:</strong> {{ skill.authorID }}<br>
-            <strong>Category ID:</strong> {{ skill.categoryID }}<br>
-            <strong>Departments:</strong>
-            <ul>
-              <li *ngFor="let department of skill.departments">{{ department }}</li>
-            </ul>
+            <label>Id:{{ skill.id }}</label>
+            <label>Name:{{ skill.name }}</label>
+            <label>Name:{{ skill.description }}</label>
+            <label>Name:{{  skill.categoryID }}</label>
+           
             <button (click)="assignSkillToDepartment(skill.id)">Add Skill to Department</button>
           </li>
         </ul>
-      </div>
+      
+    </div>
+  </div>
       
         
         

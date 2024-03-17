@@ -34,9 +34,22 @@
       <div class="employees-grid">
         <h2>Employees</h2>
         <div class="employee-card" *ngFor="let employee of employees">
+            <div>{{ employee.id }}</div>
           <div>{{ employee.name }}</div>
-          
+          Custom Roles:
+          <input placeholder="Work Hours"  [(ngModel)]="workhours">
+         
+          <select [(ngModel)]="selectedRole">
+            <option *ngFor="let role of data.project.customRoles" [value]="role.key">{{ role.key }}</option>
+          </select >
+          <ul>
+            <label>Selected Roles</label>
+            <li *ngFor="let role of roles">{{role}}</li>
+          </ul>
+          <input placeholder="Comment"  [(ngModel)]="comment">
+          <button (click)="addCustomRole()">Add role</button>
           <button (click)="assignmentProposal(employee.id)">Team Member Proposal</button>
+         
         </div>
       </div>
       

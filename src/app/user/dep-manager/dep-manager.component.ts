@@ -7,6 +7,7 @@ import { AuthService } from '../../../services/authService/auth.service';
 import { Subject, takeUntil } from 'rxjs';
 import { DepartmentService } from '../../../services/departmentService/department.service';
 import { SkillService } from '../../../services/skillService/skill.service';
+import { MemberAssignmentService } from '../../../services/teamAssignment/member-assignment.service';
 
 @Component({
   selector: 'app-dep-manager',
@@ -16,15 +17,79 @@ import { SkillService } from '../../../services/skillService/skill.service';
   styleUrl: './dep-manager.component.css'
 })
 export class DepManagerComponent implements OnInit,OnDestroy{
+  proposedEmployee:any;
+comment: any;
+confirmProposal(arg0: any,type:any,comment:any) {
+  this.proposedEmployee = arg0;
+  console.log(comment);
+  this.proposedEmployee.comment = comment;
+  console.log(type);
+  this.proposedEmployee.type =type;
+  console.log(this.proposedEmployee);
+  this.assignmentProposalService.updateDeleteAssignmentProposal(this.proposedEmployee.userID,
+    this.proposedEmployee.id,
+    this.proposedEmployee.projectID,
+    this.proposedEmployee.workHours,
+    this.proposedEmployee.customRoles,
+    this.proposedEmployee.comment,
+    type).subscribe(data=>{
+      console.log(data);
+      this.loadAssignmentProposals();
+      
+    },error=>{
+      console.log(error);
+      this.loadAssignmentProposals();
+    })
+}
+
+showAssignmentProposals: boolean = false;
+assignmentProposals:any // Initialize with empty array
+
+selectedSkillCategoryUpdate: any;
+type: any;
+toggleAssignmentProposals(): void {
+  this.showAssignmentProposals = !this.showAssignmentProposals;
+  // Load assignment proposals if needed when the section is opened
+  if (this.showAssignmentProposals) {
+    this.loadAssignmentProposals();
+  }
+}
+  loadAssignmentProposals() {
+    this.assignmentProposalService.getProposalsByDepartment(this.employeeDetails.depId).subscribe(data=>{
+      console.log(data);
+      this.assignmentProposals = data;
+    },error=>{
+      console.log(error);
+    })
+  }
+addSkillCategory() {
+    this.skillService.createSkillCategory(this.skillCategoryy).subscribe(data=>{
+      console.log(data);
+      this.getSkillCategories();
+     },error=>{
+      this.getSkillCategories();
+     
+     });
+}
 skillsFromOtherDeps: any;
+skillCategoryy: any;
+  skillCategories!: any[];
+selectedSkillCategory: any;
 getSkillsFromOtherDeps(){
-  this.skillService.getUnendorsedSkills(this.adminId).subscribe(data=>{
+  this.skillService.getUnendorsedSkills(this.employeeDetails.depId).subscribe(data=>{
     console.log(data);
     this.skillsFromOtherDeps = data;
    },error=>{
     console.log(error);
    
    });
+}
+async getSkillCategories() {
+  this.skillService.getSkillCategories().subscribe(data=>{
+    this.skillCategories = data;
+  },error=>{
+    console.log()
+  });
 }
 assignSkillToDepartment(skillID:any) {
   if(skillID){
@@ -49,7 +114,7 @@ deleteSkillDepartment(skillID: any) {
 newskillCategory: any;
   
 updateSkillDepartment(skillid:any) {
-  this.skillService.updateSkillDep(this.adminId,skillid,this.newskillDescription,this.newskillDescription,this.newskillCategory).subscribe(data=>{
+  this.skillService.updateSkillDep(this.adminId,skillid,this.newskillName,this.newskillDescription,this.selectedSkillCategoryUpdate.name).subscribe(data=>{
     console.log(data);
     this.getDepartmentSkills();
    },error=>{
@@ -60,9 +125,9 @@ updateSkillDepartment(skillid:any) {
 skills: any;
 newskillName: any;
 newskillDescription: any;
-  constructor(private route:ActivatedRoute,private router:Router, private authService:AuthService,private deptService:DepartmentService,private skillService:SkillService){}
+  constructor(private route:ActivatedRoute,private assignmentProposalService:MemberAssignmentService, private router:Router, private authService:AuthService,private deptService:DepartmentService,private skillService:SkillService){}
 addSkillToDepartment() {
-   this.skillService.createSkill(this.adminId,this.skillName,this.skillDescription,this.skillCategory,[this.employeeDetails.depId]).subscribe(data=>{
+   this.skillService.createSkill(this.adminId,this.skillName,this.skillDescription,this.selectedSkillCategory.name,[this.employeeDetails.depId]).subscribe(data=>{
     console.log(data);
     this.getDepartmentSkills();
    },error=>{
@@ -144,6 +209,7 @@ ngOnInit(): void {
           this.getUnassignedEmployees();
           this.getDepartmentSkills();
           this.getSkillsFromOtherDeps()
+          this.getSkillCategories();
          // console.log(this.deptName);
           //this.employeeDetails.depId = this.deptName;
 

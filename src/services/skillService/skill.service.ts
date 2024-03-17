@@ -17,6 +17,30 @@ export class SkillService {
 
   constructor(private http: HttpClient) { }
 
+  createSkillCategory(name: any): Observable<any> {
+    const body = {
+      "id": "string",
+      "name": name
+    }
+    return this.http.post<any>(`${this.apiUrl}/CreateSkillCategory`, body);
+  }
+
+  getSkillCategories(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/GetSkillCategories`);
+  }
+
+  updateSkillCategory(name:any): Observable<any> {
+    const body = {
+      "id": "string",
+      "name": name
+    }
+    return this.http.put<any>(`${this.apiUrl}/UpdateSkillCategory`, body);
+  }
+
+  deleteSkillCategory(id: string): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}/DeleteSkillCategory?id=${id}`);
+  }
+
   getAllSkills(managerUserId: string): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/GetAllSkills?managerUserId=${managerUserId}`);
   }
@@ -77,7 +101,7 @@ export class SkillService {
     return this.http.post<any>(url,null) // No request body needed since data is in URL
   }
   getUnendorsedSkills(managerID:string):Observable<any>{
-    const url = `${this.apiUrl}/GetUnendorsedSkills?managerUserId=${managerID}`;
+    const url = `${this.apiUrl}/GetUnendorsedSkills?departmentId=${managerID}`;
   
     return this.http.get<any>(url) // No request body needed since data is in URL
   }
