@@ -1,0 +1,10 @@
+<div class="statistics-popup">
+    <h2>Skill Statistics</h2>
+    <div class="chart-container">
+      <div *ngFor="let stat of statistics; let i = index" class="chart">
+        <h3>{{ stat.skillName }}</h3>
+        <canvas id="chart{{ i }}" width="400" height="400"></canvas>
+      </div>
+    </div>
+  </div>
+  

@@ -105,6 +105,11 @@ export class SkillService {
   
     return this.http.get<any>(url) // No request body needed since data is in URL
   }
+  getSkillStatistics(managerID:string):Observable<any>{
+    const url = `${this.apiUrl}/GetSkillsAndStatisticsForDepartment?managerUserId=${managerID}`;
+  
+    return this.http.get<any>(url) // No request body needed since data is in URL
+  }
 
 
 

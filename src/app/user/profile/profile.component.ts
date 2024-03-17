@@ -7,6 +7,7 @@ import { CommonModule, NgIf } from '@angular/common';
 import { SkillsComponent } from "../skills/skills.component";
 import { SkillService } from '../../../services/skillService/skill.service';
 import { FormsModule } from '@angular/forms';
+import { ProjectService } from '../../../services/projectService/project.service';
 
 @Component({
     selector: 'app-profile',
@@ -16,6 +17,12 @@ import { FormsModule } from '@angular/forms';
     imports: [NgIf, CommonModule, RouterLink, SkillsComponent,FormsModule]
 })
 export class ProfileComponent implements OnInit,OnDestroy{
+showCurrentProjects = false;
+showPastProjects = false;
+
+
+currentProjects: any;
+pastProjects: any;
 getSkillName(sakillID: any) {
   console.log(sakillID.key);
  
@@ -46,7 +53,7 @@ deleteSkill(skillID:any) {
   deptName:any;
 skills: any;
 showSkills = false;
-
+projects:any;
   selectedSkill: any; // To store the selected skill for popup
   skillLevel: string = '';
   skillExperience: string = ''
@@ -61,7 +68,8 @@ isNavigating = false;
     private authService: AuthService,
     private skillService: SkillService,
     private employeeDetailsService: EmployeeDetailsService,
-    private router: Router
+    private router: Router,
+    private projectService:ProjectService
   ) { }
   logout(): void {
     this.router.navigate(['/login']);
@@ -135,6 +143,7 @@ isNavigating = false;
               console.log(departmentName); // This will print "HR"
               this.deptName = departmentName;
               this.takeAllskills();
+              this.fetchProjects();
             });
            
            // console.log(this.deptName);
@@ -146,7 +155,29 @@ isNavigating = false;
 
     // Subscribe to changes in employeeDetails 
   }
+  toggleCurrentProjects() {
+    this.showCurrentProjects = !this.showCurrentProjects;
+  }
 
+  togglePastProjects() {
+    this.showPastProjects = !this.showPastProjects;
+  }
+  fetchProjects() {
+    // Assuming you have a service method to fetch projects based on employee ID
+    this.projectService.getEmployeeProjects(this.employeeDetails.id).subscribe(
+      (data) => {
+        // Assuming data contains all projects related to the employee
+        this.currentProjects = data.currentProjects;
+        this.projects = data.pastProjects;
+      },
+      (error) => {
+        console.error('Error fetching projects:', error);
+      }
+    );
+  }
+  getCustomRoles(project: any): string {
+    return project.customRoles.map((role: { key: any; }) => role.key).join(', ');
+  }
   ngOnDestroy(){
     // Unsubscribe from the subscription to avoid memory leaks
     this.unsubscribe$.next();

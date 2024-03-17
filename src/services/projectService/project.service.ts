@@ -29,6 +29,24 @@ export class ProjectService {
 
     return this.http.get<any>(`${this.apiUrl}/GetProjects?managerUserId=${managerUserId}`, httpOptions);
   }
+  getProjectsFromOrganization(orgId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.get<any>(`${this.apiUrl}/GetOrganizationProjects?orgId=${orgId}`, httpOptions);
+  }
+  getEmployeeProjects(employeeId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.get<any>(`${this.apiUrl}/GetEmployeeProjects?employeeId=${employeeId}`, httpOptions);
+  }
   updateProject(projectId: string, project: any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

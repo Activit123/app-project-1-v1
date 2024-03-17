@@ -11,6 +11,7 @@
   <p>Department Management Page</p>
 
   <button (click)="toggleDepartmentMembers()">Department Members</button>
+  <button (click)="showSkillsStatisticsPopup()">Show Statistics</button>
   <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
   <button (click)="toggleAssignmentProposals()">Assignment Proposals</button>
   <button (click)="toggleManageSkills()">Manage Skills</button>
@@ -55,6 +56,7 @@
    
       <!-- Add more department members as needed -->
     </ul>
+   
   </div>
     <!-- Assignment Proposals Section -->
     <div *ngIf="showAssignmentProposals">
@@ -84,6 +86,19 @@
         </div>
        
       </div>
+    </div>
+    <div *ngIf="showSkillsStatisticsSection">
+      <p>This is the Skills Statistics section.</p>
+      <!-- Your Skills Statistics content goes here --> <canvas id="totalCountPieChart" width="400" height="400"></canvas>
+      
+    <!-- Placeholder for level based pie charts -->
+    <div class="levelPieCharts">
+      <div class="levelPieChart" *ngFor="let skill of skillStatistics; let i = index">
+        <h3>Skill: {{ skill.skillName }}</h3>
+        <canvas id="level{{ i + 1 }}PieChart" width="400" height="400"></canvas>
+      </div>
+    </div>
+   
     </div>
   <div *ngIf="showManageSkills">
     <!-- List of department members -->

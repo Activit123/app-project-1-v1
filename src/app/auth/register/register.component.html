@@ -1,8 +1,21 @@
-<!-- organization-signup.component.html -->
 <div class="container">
-  <h2>Admin and Organization Signup</h2>
+  <div class="backgrounds">
+    <div class="bg-main"></div>
+    <div class="bg-1"></div>
+    <div class="bg-2"></div>
+  </div>
+  <div class="banner">
+    <h1>TeamFinder</h1><br/><br/><br/><br/>
+    <h3>Find your best team</h3>
+  </div>
+  <!-- <h2>Admin and Organization Signup</h2> -->
+ 
   <label>{{ orgDetails}}</label>
-
+  <section class="account">
+    <div class="account-wrapper">
+      <div class="account-circle"></div>
+      <div class="account-form-wrapper">
+       
     <input type="text" [(ngModel)]="empName" placeholder="Name">
     <input type="text" [(ngModel)]="empEmail" placeholder="email">
     <input type="password" [(ngModel)]="empPassword" placeholder="password">
@@ -11,14 +24,11 @@
     
     
     <label>{{ message}}</label>
-    <button (click)="register()">Register</button>
+    <button (click)="register()">Register</button><br/>
     <button (click)="login()">Go to Login Page</button>
     
-
+        </div>
   <!-- Label to display the response message -->
-  
 </div>
-  
-  
-
-  
+</section>
+</div>
