@@ -8,6 +8,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { DepartmentService } from '../../../services/departmentService/department.service';
 import { SkillService } from '../../../services/skillService/skill.service';
 import { MemberAssignmentService } from '../../../services/teamAssignment/member-assignment.service';
+import { TeamFinderServiceService } from '../../../services/teamFinderService/team-finder-service.service';
 
 @Component({
   selector: 'app-dep-manager',
@@ -19,28 +20,74 @@ import { MemberAssignmentService } from '../../../services/teamAssignment/member
 export class DepManagerComponent implements OnInit,OnDestroy{
   proposedEmployee:any;
 comment: any;
-confirmProposal(arg0: any,type:any,comment:any) {
+teamid:any;
+confirmProposal(arg0: any, type: any, comment: any) {
   this.proposedEmployee = arg0;
-  console.log(comment);
+  console.log("Comment:", comment);
   this.proposedEmployee.comment = comment;
-  console.log(type);
-  this.proposedEmployee.type =type;
-  console.log(this.proposedEmployee);
-  this.assignmentProposalService.updateDeleteAssignmentProposal(this.proposedEmployee.userID,
+  console.log("Type:", type);
+  this.proposedEmployee.type = type;
+  console.log("Proposed Employee:", this.proposedEmployee);
+
+  this.assignmentProposalService.updateDeleteAssignmentProposal(
+    this.proposedEmployee.userID,
     this.proposedEmployee.id,
     this.proposedEmployee.projectID,
     this.proposedEmployee.workHours,
     this.proposedEmployee.customRoles,
     this.proposedEmployee.comment,
-    type).subscribe(data=>{
-      console.log(data);
+    type
+  ).subscribe(
+    (data) => {
+      console.log("Update/Delete Proposal Data:", data);
+      this.handleAdditionalOperations(type);
+    },
+    (error) => {
+      console.log("Update/Delete Proposal Error:", error);
       this.loadAssignmentProposals();
-      
-    },error=>{
-      console.log(error);
-      this.loadAssignmentProposals();
-    })
+    }
+  );
 }
+
+handleAdditionalOperations(type: any) {
+  if (type) {
+    console.log("Project ID:", this.proposedEmployee.projectID);
+    this.teamService.getTeamForProject(this.proposedEmployee.projectID).subscribe(
+      (data) => {
+        console.log("Team Data:", data);
+        console.log("Inside get team");
+        this.teamid = data[0].id; // Initialize to empty object if data is null
+        console.log("Team ID:", this.teamid);
+        this.updateTeam(this.teamid);
+      },
+      (error) => {
+        console.log("Get Team Error:", error);
+        this.loadAssignmentProposals();
+      }
+    );
+  }
+}
+
+updateTeam(teamid:any) {
+  const teami = teamid;
+  console.log("Team ID:", teami); // Logging here to ensure this.teamid is defined
+  this.teamService.updateTeamForProject(
+    this.proposedEmployee.projectID,
+    teami,
+    this.proposedEmployee.userID,
+    this.proposedEmployee.workHours,
+    this.proposedEmployee.customRoles
+  ).subscribe(
+    (data) => {
+      console.log("Update Team Data:", data);
+      this.loadAssignmentProposals();
+    },
+    (error) => {
+      console.log("Update Team Error:", error);
+    }
+  );
+}
+
 
 showAssignmentProposals: boolean = false;
 assignmentProposals:any // Initialize with empty array
@@ -125,7 +172,7 @@ updateSkillDepartment(skillid:any) {
 skills: any;
 newskillName: any;
 newskillDescription: any;
-  constructor(private route:ActivatedRoute,private assignmentProposalService:MemberAssignmentService, private router:Router, private authService:AuthService,private deptService:DepartmentService,private skillService:SkillService){}
+  constructor(private teamService:TeamFinderServiceService, private route:ActivatedRoute,private assignmentProposalService:MemberAssignmentService, private router:Router, private authService:AuthService,private deptService:DepartmentService,private skillService:SkillService){}
 addSkillToDepartment() {
    this.skillService.createSkill(this.adminId,this.skillName,this.skillDescription,this.selectedSkillCategory.name,[this.employeeDetails.depId]).subscribe(data=>{
     console.log(data);

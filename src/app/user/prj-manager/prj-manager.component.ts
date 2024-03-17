@@ -39,11 +39,24 @@ interface Project {
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
 projectUsers: any;
-createTeam() {
-
+createTeam(projectID:any) {
+const projectid = projectID;
+this.teamFindService.createTeamForProject(projectid).subscribe(data=>{
+  console.log(data);
+  this.showTeamMembers(projectID);
+},error=>{
+  console.log(error);
+  this.showTeamMembers(projectID);
+})
 }
-showTeamMembers(){
-  
+showTeamMembers(id:any){
+  const prjid = id;
+  this.teamFindService.getTeamForProject(prjid).subscribe(data=>{
+    this.projectUsers = data;
+    console.log(data);
+  },error=>{
+    console.log(error);
+  });
 }
 assignmentProposals: any;
 showProjectTeam: any;
@@ -56,12 +69,7 @@ toggleProjectTeam(arg:any) {
 this.showProjectTeam = !this.showProjectTeam;
 const prjid = arg;
 console.log(prjid);
-this.teamFindService.getTeamForProject(prjid).subscribe(data=>{
-  this.projectUsers = data;
-  console.log(data);
-},error=>{
-  console.log(error);
-})
+this.showTeamMembers(prjid);
 }
 toggleAssignmentProposals() {
 this.showAssignmentProposals = !this.showAssignmentProposals;

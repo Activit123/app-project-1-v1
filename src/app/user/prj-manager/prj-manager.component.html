@@ -125,11 +125,12 @@
       <div *ngIf="showProjectTeam">
         <!-- Display project team -->
         <h3>Project Team</h3>
-        <button (click)="createTeam()">Create Team</button>
+        <button (click)="createTeam(project.id)">Create Team</button>
         <div class="project-team">
           <!-- Display project team members as cards -->
           <h2>Project Users</h2>
           <div class="card" *ngFor="let projectUser of projectUsers">
+            <h5 class="card-subtitle mb-2 text-muted">Team ID: {{ projectUser.id }}</h5>
             <div class="card-body">
 
               <div class="card" *ngFor="let user of projectUser.users">
