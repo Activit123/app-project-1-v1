@@ -14,6 +14,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpdateProjectPopupComponent } from './update-project-popup/update-project-popup.component';
 import { TeamFinderPopupComponent } from './team-finder-popup/team-finder-popup.component';
+import { TeamFinderServiceService } from '../../../services/teamFinderService/team-finder-service.service';
 interface Project {
   id?: string;
   name?: string;
@@ -37,8 +38,12 @@ interface Project {
   styleUrl: './prj-manager.component.css'
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
+projectUsers: any;
 createTeam() {
 
+}
+showTeamMembers(){
+  
 }
 assignmentProposals: any;
 showProjectTeam: any;
@@ -47,8 +52,16 @@ showAssignmentProposals: any;
 confirmProposal(_t160: any) {
 throw new Error('Method not implemented.');
 }
-toggleProjectTeam() {
+toggleProjectTeam(arg:any) {
 this.showProjectTeam = !this.showProjectTeam;
+const prjid = arg;
+console.log(prjid);
+this.teamFindService.getTeamForProject(prjid).subscribe(data=>{
+  this.projectUsers = data;
+  console.log(data);
+},error=>{
+  console.log(error);
+})
 }
 toggleAssignmentProposals() {
 this.showAssignmentProposals = !this.showAssignmentProposals;
@@ -212,7 +225,7 @@ addRole() {
 employeeDetails: any = "";
 
 project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStatus: '', description: '', projectManagerID: '', customRoles: [], skillRequirements: [] }; // Initialize project object with empty values
-  constructor(private dialog: MatDialog,private route:ActivatedRoute,private router:Router, private authService:AuthService,private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
+  constructor(private dialog: MatDialog,private route:ActivatedRoute,private router:Router, private authService:AuthService,private teamFindService:TeamFinderServiceService, private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
 
   }
 
