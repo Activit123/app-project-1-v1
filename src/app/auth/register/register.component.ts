@@ -76,9 +76,11 @@ orgId:any;
     this.authService.createAdmin(this.empName,this.empEmail,this.empPassword,orgid).subscribe(data=>{
      console.log(data);
      this.message = "Register Succesful";
+     this.login();
     },error=>{
      console.log(error);
-     this.message = "Error on registration"
+     this.message = "Error on registration";
+     this.login();
     });
   }
 }
