@@ -22,7 +22,13 @@ import { MemberAssignmentService } from '../../../../services/teamAssignment/mem
   styleUrl: './team-finder-popup.component.css'
 })
 export class TeamFinderPopupComponent implements OnInit{
+showTextArea = false;
+textAreaInput: any;
+updateInputState(arg0: any) {
+throw new Error('Method not implemented.');
+}
 comment: any;
+isInputActive= false;
 addCustomRole() {
   if(this.selectedRole){
     for(let role of this.comparedRole){
@@ -62,23 +68,33 @@ assignmentProposal(empID: any) {
     console.log(error);
    });
 }
-findTeam() {
- 
+findTeam(enabled:boolean,prompt:any) {
+ if(!enabled){
   this.employees = null;
-    console.log(this.data);
-    this.teamfinder.teamFinder(this.data.orgID,
-      this.data.project.id,
-      this.includePartiallyAvailable,
-      this.weeksToProjectCompletion,
-      this.includeUnavailable,
-      this.includeCloseToFinish).subscribe(data=>{
-        this.employees = data;
-        this.fetchTeamRoles();
-        console.log(data);
-      },error=>{
-        console.log(error);
-      });
-      console.log("iese");
+  console.log(this.data);
+  this.teamfinder.teamFinder(this.data.orgID,
+    this.data.project.id,
+    this.includePartiallyAvailable,
+    this.weeksToProjectCompletion,
+    this.includeUnavailable,
+    this.includeCloseToFinish).subscribe(data=>{
+      this.employees = data;
+      this.fetchTeamRoles();
+      console.log(data);
+    },error=>{
+      console.log(error);
+    });
+    console.log("iese");
+ }else{
+  this.employees = null;
+  this.teamfinder.teamFinderAI(this.data.orgID,this.data.project.id,prompt).subscribe(data=>{
+    this.employees = data;
+      this.fetchTeamRoles();
+  },error=>{
+    console.log(error);
+  })
+ }
+ 
 }
   includePartiallyAvailable: boolean = false;
   weeksToProjectCompletion: number = 0;

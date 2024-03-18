@@ -29,8 +29,12 @@
         </select>
         
       </div>
-    
-      <button (click)="findTeam()">Find Team</button>  <button class="close-button" (click)="closePopup()">Close</button>
+     <!-- Your component's template -->
+<input type="checkbox" [(ngModel)]="showTextArea"> Additional Context
+<textarea *ngIf="showTextArea" [(ngModel)]="textAreaInput"></textarea>
+
+
+      <button (click)="findTeam(showTextArea,textAreaInput)">Find Team</button>  <button class="close-button" (click)="closePopup()">Close</button>
       <div class="employees-grid">
         <h2>Employees</h2>
         <div class="employee-card" *ngFor="let employee of employees">
