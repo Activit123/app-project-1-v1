@@ -21,6 +21,7 @@ interface SkillStatistics {
 })
 
 export class StatisticsPopupComponent implements AfterViewInit{
+ 
   statistics: any[];
   levels = [1, 2, 3, 4, 5];
   title = 'ng-chart';
@@ -32,6 +33,26 @@ export class StatisticsPopupComponent implements AfterViewInit{
     throw new Error('Method not implemented.');
   }
   ngOnInit(): void {
+    this.chart = new Chart('canvas', {
+      type: 'pie',
+      data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+        datasets: [
+          {
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2, 3],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+          },
+        },
+      },
+    });
     if (this.statistics) {
       this.generatePieCharts();
     }
