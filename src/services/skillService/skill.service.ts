@@ -53,7 +53,7 @@ export class SkillService {
   }
 
   getAllSkills(managerUserId: string): Observable<any[]> {
-    return this.http.get<any[]>(`${this.apiUrl}/GetSkillsFromOrganization?organizationId=${managerUserId}`);
+    return this.http.get<any[]>(`${this.apiUrl}/GetOrganizationSkills?userId=${managerUserId}`);
   }
   assignSkill(userId: string, skillId: string, level: number, experience: string): Observable<any> {
     const url = `${this.apiUrl}/AssignSkill?userId=${userId}&skillId=${skillId}&level=${level}&experience=${experience}`;

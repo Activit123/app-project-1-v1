@@ -142,7 +142,7 @@ isNavigating = false;
   }
   takeAllskills(){
     if (this.employeeDetails.id) {
-      this.skillService.getAllSkills(this.employeeDetails.orgId)
+      this.skillService.getAllSkills(this.employeeDetails.id)
       .subscribe((data: any) => {
         // Assuming data is an array of skills
         console.log("intra");
@@ -174,10 +174,10 @@ isNavigating = false;
               const departmentName = data.DepartmentName;
               console.log(departmentName); // This will print "HR"
               this.deptName = departmentName;
-              this.takeAllskills();
-              this.fetchProjects();
+              
             });
-           
+            this.takeAllskills();
+            this.fetchProjects();
            // console.log(this.deptName);
             //this.employeeDetails.depId = this.deptName;
 
