@@ -62,7 +62,9 @@ export class AuthService {
     }
     return this.http.post<any>(`${this.apiUrl}/AddEmployee?organizationId=${orgID}`,body);
   }
-  
+  getOrganizationName(orgId: string) {
+    return this.http.get<any>(`${this.apiUrl}/GetOrganizationName?orgId=${orgId}`);
+  }
   // Function to fetch employee details
   getEmployeeDetails(employeeId: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}/GetEmployee?employeeId=${employeeId}`);

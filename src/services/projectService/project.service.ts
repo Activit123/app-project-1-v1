@@ -20,6 +20,15 @@ export class ProjectService {
     return this.http.post<any>(`${this.apiUrl}/CreateProject?managerUserId=${managerUserId}`,project);
       
   }
+  getDepProjects(managerUserId: string): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.http.get<any>(`${this.apiUrl}/GetDepProjects?managerUserId=${managerUserId}`, httpOptions);
+  }
   getProjects(managerUserId: string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({

@@ -260,6 +260,7 @@ project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStat
     console.log(projec);
     this.projectService.createProject(this.adminId,projec).subscribe(data=>{
       console.log(data);
+      this.showCreateProject = !this.showCreateProject;
       this.viewProjects();
     },error=>{
       console.log(error);

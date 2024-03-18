@@ -57,15 +57,8 @@ pastProjects: any;
 notificationCount: any;
 getSkillName(sakillID: any) {
   console.log(sakillID.key);
- 
-   for(let skill of this.skills){
-      if(skill.id === sakillID.key){
-        console.log("intra",skill.id);
-          return skill.name;
-      }  else{
-        return "not found";
-      } 
-   }
+  const skillid = sakillID;
+  
 }
 deleteSkill(skillID:any) { 
   console.log(skillID);
@@ -202,6 +195,7 @@ isNavigating = false;
         this.currentProjects = data.currentProjects;
         this.notificationCount = data.currentProjects.length;
         this.projects = data.pastProjects;
+        
       },
       (error) => {
         console.error('Error fetching projects:', error);

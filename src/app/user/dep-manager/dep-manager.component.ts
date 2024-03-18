@@ -23,14 +23,10 @@ export class DepManagerComponent implements OnInit,OnDestroy{
 notificationCount: any;
 showSkillsStatisticsPopup() {
   this.skillService.getSkillStatistics(this.employeeDetails.id).subscribe(
-    (data: any) => {
+    (dataa: any) => {
       const dialogRef = this.dialog.open(StatisticsPopupComponent, {
         width: '500px',
-        data: Object.entries(data).map(([skillName, stats]: [string, any]) => ({
-          skillName,
-          totalCount: stats.TotalUsers,
-          levelCounts: [stats.Level1, stats.Level2, stats.Level3, stats.Level4, stats.Level5]
-        }))
+        data: dataa
       });
     },
     (error) => {

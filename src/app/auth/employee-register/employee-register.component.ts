@@ -34,20 +34,24 @@ export class EmployeeRegisterComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute
   ) {}
 
+  getOrganizationName(): void {
+    const orgId = this.orgID // Replace with the actual organization ID
+    this.authService.getOrganizationName(orgId).subscribe(
+      (response) => {
+        this.orgID = response.OrganizationName;
+      },
+      (error) => {
+        console.error('Error fetching organization name:', error);
+      }
+    );
+  }
+
   ngOnInit() {
     this.route.paramMap
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe(params => {
         this.orgID = params.get('orgId');
-        this.authService.getOrgName(this.orgID).subscribe(
-          (data: any) => {
-            this.orgName = data.name;
-          },
-          error => {
-            console.log(error);
-            this.orgName = 'Error';
-          }
-        );
+        this.getOrganizationName();
       });
   }
 
