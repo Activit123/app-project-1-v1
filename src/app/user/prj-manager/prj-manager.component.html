@@ -2,6 +2,9 @@
 <div class="container">
   <!-- Menu -->
   <div *ngIf="employeeDetails" class="menu">
+    <div>
+      <span>Notifications: {{ notificationCount }}</span>
+    </div>
     <a *ngIf="employeeDetails.roles.includes('Employee')" [routerLink]="['/profile',employeeDetails.id]">Employee</a>
     <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
     <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>

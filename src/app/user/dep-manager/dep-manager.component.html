@@ -9,7 +9,10 @@
   </div>
   <div><strong>ID:</strong> {{ adminId }}</div>
   <p>Department Management Page</p>
-
+  <div>
+    <span>Notifications: {{ notificationCount }}</span>
+  </div>
+  
   <button (click)="toggleDepartmentMembers()">Department Members</button>
   <button (click)="showSkillsStatisticsPopup()">Show Statistics</button>
   <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
@@ -145,12 +148,12 @@
       <h3>Other Department Skills</h3>
       
      
-      <div class="skill-card-container">
-        <div class="skill-card" *ngFor="let skill of skills">
+      <div>
+        <div >
       
         <h2>Skills</h2>
-        <ul>
-          <li *ngFor="let skill of skillsFromOtherDeps">
+        <ul class="skill-card-container">
+          <li  class="skill-card" *ngFor="let skill of skillsFromOtherDeps">
             <label>Id:{{ skill.id }}</label>
             <label>Name:{{ skill.name }}</label>
             <label>Name:{{ skill.description }}</label>
@@ -159,7 +162,6 @@
             <button (click)="assignSkillToDepartment(skill.id)">Add Skill to Department</button>
           </li>
         </ul>
-      
     </div>
   </div>
       

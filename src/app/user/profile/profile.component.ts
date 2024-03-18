@@ -23,6 +23,7 @@ showPastProjects = false;
 
 currentProjects: any;
 pastProjects: any;
+notificationCount: any;
 getSkillName(sakillID: any) {
   console.log(sakillID.key);
  
@@ -168,6 +169,7 @@ isNavigating = false;
       (data) => {
         // Assuming data contains all projects related to the employee
         this.currentProjects = data.currentProjects;
+        this.notificationCount = data.currentProjects.length;
         this.projects = data.pastProjects;
       },
       (error) => {

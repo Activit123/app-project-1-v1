@@ -20,6 +20,7 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './dep-manager.component.css'
 })
 export class DepManagerComponent implements OnInit,OnDestroy{
+notificationCount: any;
 showSkillsStatisticsPopup() {
   this.skillService.getSkillStatistics(this.employeeDetails.id).subscribe(
     (data: any) => {
@@ -194,6 +195,7 @@ toggleAssignmentProposals(): void {
     this.assignmentProposalService.getProposalsByDepartment(this.employeeDetails.depId).subscribe(data=>{
       console.log(data);
       this.assignmentProposals = data;
+      this.notificationCount = this.assignmentProposals.length;
     },error=>{
       console.log(error);
     })
@@ -231,10 +233,11 @@ assignSkillToDepartment(skillID:any) {
   if(skillID){
     this.skillService.assignSkillToDep(this.adminId,skillID).subscribe(data=>{
       console.log(data);
+      this.getSkillsFromOtherDeps();
+      this.getDepartmentSkills();
     },error=>{
       console.log(error);
     });
-    
   }
    
 }
@@ -333,6 +336,7 @@ showNotDepartmentMembers= false;
 ngOnInit(): void {
   console.log("intra aici");
   this.route.paramMap.pipe(takeUntil(this.unsubscribe$)).
+ 
   subscribe(params =>{
     console.log("intra departament");
     this.adminId = params.get('employeeId');
@@ -347,6 +351,7 @@ ngOnInit(): void {
           this.getSkillsFromOtherDeps()
           this.getSkillCategories();
           this.fetchSkillStatistics();
+          this.loadAssignmentProposals();
          // console.log(this.deptName);
           //this.employeeDetails.depId = this.deptName;
 

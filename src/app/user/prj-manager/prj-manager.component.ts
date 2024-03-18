@@ -39,6 +39,7 @@ interface Project {
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
 projectUsers: any;
+notificationCount: any;
 createTeam(projectID:any) {
 const projectid = projectID;
 this.teamFindService.createTeamForProject(projectid).subscribe(data=>{

@@ -96,12 +96,12 @@ export class SkillService {
     return this.http.post<any>(url,body) // No request body needed since data is in URL
   }
   assignSkillToDep(managerID:string,skillID:string):Observable<any>{
-    const url = `${this.apiUrl}/DeleteSkill?&managerUserId=${managerID}&skillId=${skillID}`;
+    const url = `${this.apiUrl}/AssignSkillToDepartment?&managerUserId=${managerID}&skillId=${skillID}`;
   
     return this.http.post<any>(url,null) // No request body needed since data is in URL
   }
   getUnendorsedSkills(managerID:string):Observable<any>{
-    const url = `${this.apiUrl}/GetUnendorsedSkills?departmentId=${managerID}`;
+    const url = `${this.apiUrl}/GetSkillsNotInDepartment?departmentId=${managerID}`;
   
     return this.http.get<any>(url) // No request body needed since data is in URL
   }

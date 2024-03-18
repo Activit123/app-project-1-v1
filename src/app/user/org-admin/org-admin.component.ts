@@ -17,6 +17,7 @@ import { DepartmentService } from '../../../services/departmentService/departmen
 })
 export class OrgAdminComponent implements OnInit,OnDestroy{
 NewCustomRoleName: any;
+notificationCount: any;
 updateCustomRole(customRoleID:any) {
 console.log(customRoleID);
 this.roleService.updateCustomRole(this.adminId,customRoleID,this.NewCustomRoleName).subscribe(data =>{
@@ -248,7 +249,9 @@ isAdminRoute: any;
   }
   getDepartmentDetails(){
     this.departmentService.getOrganizationDepartments(this.adminId).subscribe(data => {
+     
       this.departments = data;
+      this.notificationCount = this.departments.length;
     });
   }
   ngOnDestroy(): void {

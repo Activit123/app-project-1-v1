@@ -11,6 +11,9 @@
   <div><strong>ID:</strong> {{ adminId }}</div>
   <p>Administration Page</p>
   <a [routerLink]="['/employee-register',employeeDetails.orgId]">Employee sign-up link</a>
+  <div>
+    <span>New Departments: {{ notificationCount }}</span>
+  </div>
   <button (click)="toggleEmployeesList()">Show Employees</button>
   <button (click)="toogleShowTeamRoles()">Show Team Roles</button>
   <button (click)="toogleShowDepartments()">Manage Departments</button>

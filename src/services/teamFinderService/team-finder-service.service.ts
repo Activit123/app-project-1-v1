@@ -25,7 +25,7 @@ export class TeamFinderServiceService {
       })
     };
 
-    return this.http.get<any>(`${this.apiUrl}/FindTeamMembersAI?orgId=${orgID}&projectId=${projectId}&promt=${prompt}`, httpOptions);
+    return this.http.get<any>(`${this.apiUrl}/FindTeamMembersAI?orgId=${orgID}&projectId=${projectId}&prompt=${prompt}`, httpOptions);
   }
   getTeamForProject(projectId: any): Observable<any> {
     const httpOptions = {

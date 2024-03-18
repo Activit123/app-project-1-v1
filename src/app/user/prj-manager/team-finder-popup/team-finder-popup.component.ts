@@ -87,7 +87,11 @@ findTeam(enabled:boolean,prompt:any) {
     console.log("iese");
  }else{
   this.employees = null;
-  this.teamfinder.teamFinderAI(this.data.orgID,this.data.project.id,prompt).subscribe(data=>{
+  const p = prompt;
+  console.log(p);
+  this.teamfinder.teamFinderAI(this.data.orgID,this.data.project.id,p).subscribe(data=>{
+    
+    console.log(data);
     this.employees = data;
       this.fetchTeamRoles();
   },error=>{
