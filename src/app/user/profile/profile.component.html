@@ -52,12 +52,40 @@
         </div>
         
         <!-- Skills section -->
-        <div id="skillsDiv" *ngIf="showSkills">
+        <div id="skillsDiv">
           <h2>Add Skills</h2>
           <div class="skill-grid">
             <div *ngFor="let skill of employeeDetails.skills" class="skill-box">
               <div>{{ getSkillName(skill) }}:{{ skill.key }}: {{ skill.value }}</div>
+              <button (click)="showAddEndorsementPopup(skill)" class="btn btn-primary">Add Endorsement</button>
               <button (click)="deleteSkill(skill.key)" class="btn btn-danger">Delete Skill</button>
+            </div>
+          </div>
+          <div *ngIf="showAddEndorsementPopupEnable" class="modal fade show d-block">
+            <div class="modal-dialog modal-dialog-centered">
+              <h2>Add Endorsement for {{ selectedSkill.name }}</h2>
+              <div class="modal-content popup-content">
+                <select [(ngModel)]="endtype">
+                  <option value="Training">Training</option>
+                  <option value="Course">Course</option>
+                  <option value="Project">Project</option>
+                </select>
+                <div *ngIf="endtype !== 'Project'">
+                  <input type="text" placeholder="Title" [(ngModel)]="endorsementTitle">
+                </div>
+                <div *ngIf="endtype === 'Project'">
+                  <select [(ngModel)]="endorsementTitle">
+                    <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
+                  </select>
+                </div>
+               
+                <input type="text" placeholder="Description" [(ngModel)]="endorsementDescription">
+                <select  [(ngModel)]="isLink">
+                  <option value="true">True</option>
+                  <option value="false">False</option>
+                </select>
+                <button (click)="addEndorsement()">Add Endorsement</button>
+              </div>
             </div>
           </div>
         </div>

@@ -17,6 +17,37 @@ import { ProjectService } from '../../../services/projectService/project.service
     imports: [NgIf, CommonModule, RouterLink, SkillsComponent,FormsModule]
 })
 export class ProfileComponent implements OnInit,OnDestroy{
+selectedProject: any;
+  addEndorsement() {
+    // Call the API to add the endorsement
+    this.skillService.addSkillEndorsement(
+      this.employeeDetails.id,
+      this.selectedSkill.key, // Assuming this is the skill ID
+      this.endtype,
+      this.endorsementTitle,
+      this.endorsementDescription,
+      this.isLink
+    ).subscribe(response => {
+      // Handle response if necessary
+      console.log('Endorsement added successfully:', response);
+      // Close the popup
+      this.showAddEndorsementPopupEnable = false;
+    }, error => {
+      console.error('Error adding endorsement:', error);
+      // Handle error if necessary
+    });
+  }
+  showAddEndorsementPopup(skill: any) {
+    this.selectedSkill = skill;
+    this.showAddEndorsementPopupEnable = true;
+  }
+showAddEndorsementPopupEnable: any;
+
+endorsementDescription: any;
+endorsementTitle: any;
+endtype: any;
+isLink: any;
+
 showCurrentProjects = false;
 showPastProjects = false;
 

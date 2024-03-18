@@ -47,7 +47,8 @@ orgId:any;
       .subscribe(
         response => {
           console.log('Organization signup successful:', response);
-          
+         // this.orgId = response;
+
           // Refresh organization details after signup
          // this.loadOrganizationDetails();
         },
@@ -55,19 +56,29 @@ orgId:any;
           console.error('Error signing up organization:', error);
           // Set the error message to display on the label
           this.signupResponse = 'Error signing up organization. Please try again.';
-          this.orgId = error.id;
+          
+          this.orgId = error.error.text;
+          console.log(this.orgId);
+          this.createAdmin(error.error.text);
           // Set the response message to display on the label
           this.signupResponse = error.id;
-          if(this.orgId){
-            this.authService.createAdmin(this.empName,this.empEmail,this.empPassword,this.orgId).subscribe(data=>{
-             console.log(data);
-             this.message = "Register Succesful";
-            },error=>{
-             console.log(error);
-             this.message = "Error on registration"
-            });
-           }
+          
         }
       );
+      console.log("intra");
+     
+       
+  }
+  createAdmin(arg:any){
+   const orgid = arg;
+    console.log(orgid);
+      
+    this.authService.createAdmin(this.empName,this.empEmail,this.empPassword,orgid).subscribe(data=>{
+     console.log(data);
+     this.message = "Register Succesful";
+    },error=>{
+     console.log(error);
+     this.message = "Error on registration"
+    });
   }
 }

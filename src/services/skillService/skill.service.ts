@@ -24,7 +24,18 @@ export class SkillService {
     }
     return this.http.post<any>(`${this.apiUrl}/CreateSkillCategory`, body);
   }
-
+  addSkillEndorsement(userID:any,skill:any,endorsementtype:string,title:string,description:string,isLink:boolean): Observable<any[]> {
+    return this.http.post<any[]>(`${this.apiUrl}/AddEndorsement?userId=${userID}&skillId=${skill}&endorsementType=${endorsementtype}&title=${title}&description=${description}&isLink=${isLink}`,null);
+    
+  }
+  updateskillEndorsement(userID:any,skill:any,title:string,description:string): Observable<any[]> {
+    return this.http.put<any[]>(`${this.apiUrl}/UpdateEndorsement?userId=${userID}&skillId=${skill}&newTitle=${title}&newDescription=${description}`,null);
+    
+  }
+  deleteSkillEndorsement(userID:any,skill:any,title:string): Observable<any[]> {
+    return this.http.delete<any[]>(`${this.apiUrl}/DeleteEndorsement?userId=${userID}&skillId=${skill}&title=${title}`);
+    
+  }
   getSkillCategories(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/GetSkillCategories`);
   }
