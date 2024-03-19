@@ -40,9 +40,9 @@ export class SkillService {
     return this.http.get<any[]>(`${this.apiUrl}/GetSkillCategories`);
   }
 
-  updateSkillCategory(name:any): Observable<any> {
+  updateSkillCategory(id:any,name:any): Observable<any> {
     const body = {
-      "id": "string",
+      "id": id,
       "name": name
     }
     return this.http.put<any>(`${this.apiUrl}/UpdateSkillCategory`, body);

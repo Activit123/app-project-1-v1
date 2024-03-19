@@ -1,14 +1,15 @@
 /* login.component.css */
+
+/* Common styles for all devices */
 #login {
   width: 100%;
   height: 100%;
   background-color: #fff;
-  overflow: hidden; /* Elimină overflow-y */
+  overflow: hidden; /* Eliminate overflow-y */
   justify-content: center;
   align-items: center;
 }
 
-/* Backgrounds */
 .section {
   display: flex;
   justify-content: center;
@@ -17,15 +18,18 @@
   width: 100%;
   background-color: #fff;
 }
+
 .body {
   width: 100%;
   height: 100%;
   background-color: #fff;
 }
+
 .backgrounds div {
   position: absolute;
 }
 
+/* Background styles for all devices */
 .bg-main {
   width: 150%;
   height: 150%;
@@ -60,18 +64,22 @@
   opacity: 0.4;
   box-shadow: 7rem 4rem 6rem rgba(0, 0, 0, 0.9);
 }
-/* End of Backgrounds */
-/* Account */
+
+/* Account styles for all devices */
 .account {
   scale: 1.8;
   position: absolute;
-  top:40%;
-  left: 60%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 7;
 }
+
 .account-wrapper {
-  width: 100%;
-  height: 100%;
+  width: 50rem; /* Adjust wrapper width if necessary */
+  max-width: 90%; /* Limit wrapper width for smaller screens */
+  height: 50rem; /* Adjust wrapper height if necessary */
+  max-height: 90%; /* Limit wrapper height for smaller screens */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -96,8 +104,8 @@
 }
 
 .account-form-wrapper {
-  width: 50rem;
-  height: 50rem;
+  width: 100%;
+  height: 100%;
   background-color: #fdfdfd;
   box-shadow: 0 1rem 8rem rgba(130, 162, 235, 0.3);
   z-index: 10;
@@ -119,6 +127,13 @@
   font-size: 6rem;
   color: #3776ff;
   margin-bottom: 3rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .account-inputs {
@@ -198,8 +213,8 @@
   cursor: pointer;
   margin-top: 4rem;
 }
-/* End of Account */
-/* Banner */
+
+/* Banner styles for all devices */
 .banner {
   position: absolute;
   top: 15%;
@@ -217,15 +232,44 @@
 .banner h3 {
   font-family: "Mooli", cursive;
   font-size: 10rem;
-  top:3000%;
+  top: 3000%;
   font-weight: 100;
   text-transform: uppercase;
   color: #fff;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
-  margin-left: 15rem; /* Adaugă un spațiu de 2rem între h3 și marginea stângă */
+  margin-left: 15rem; /* Add a space of 2rem between h3 and the left edge */
 }
 
-/* End of Banner */
+/* Media Query for smaller devices like smartphones */
+@media only screen and (max-width: 768px) {
+  .account {
+    scale: 1; /* Reset scale for smaller devices */
+    top: 50%; /* Adjust position */
+    left: 50%; /* Adjust position */
+    transform: translate(-50%, -50%);
+  }
 
+  .account-form-wrapper {
+    width: 90%; /* Adjust width */
+    height: auto; /* Adjust height */
+    padding: 2rem; /* Adjust padding */
+  }
 
+  .account-form-wrapper > span {
+    font-size: 4rem; /* Adjust font size */
+    margin-bottom: 2rem; /* Adjust margin */
+  }
 
+  .account-inputs input {
+    width: 100%; /* Adjust width */
+  }
+
+  /* Additional responsive adjustments */
+  .backgrounds div {
+    display: none; /* Hide backgrounds on smaller devices */
+  }
+
+  .banner {
+    display: none; /* Hide banner on smaller devices */
+  }
+}

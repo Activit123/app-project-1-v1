@@ -11,10 +11,15 @@
         <li>Level 5: {{user.value.Level5}}</li>
       </ul>
     </div>
-    
-    <div>
-      <canvas id="canvas">{{chart}}</canvas>
-    </div>
+ 
+    <canvas baseChart
+    [labels]="doughnutChartLabels"
+    [datasets]="doughnutChartDatasets"
+    [options]="doughnutChartOptions"
+    [legend]="true"
+    [type]="'pie'">
+</canvas>
+
 <canvas id="levelChart"></canvas>
 
 <h2>Total count of people on each skill</h2>

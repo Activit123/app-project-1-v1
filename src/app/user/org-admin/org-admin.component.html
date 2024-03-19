@@ -46,7 +46,7 @@
                   <button (click)="deleteDepartment(department.id)">Delete Department</button>
                   <select [(ngModel)]="selectedManager">
                       <ng-container *ngFor="let employee of employees">
-                          <option [ngValue]="employee.id" *ngIf="employee.roles.includes('DepartmentManager')">{{ employee.name }}</option>
+                          <option [ngValue]="employee.id" *ngIf="employee.roles.includes('DepartmentManager')&&(employee.orgId === employeeDetails.orgId)">{{ employee.name }}</option>
                       </ng-container>
                   </select>
                   <button (click)="assignDepartmentManager(department.id, selectedManager)">Assign Department Manager</button>
