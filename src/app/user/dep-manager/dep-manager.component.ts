@@ -210,7 +210,7 @@ skillCategoryy: any;
   skillCategories!: any[];
 selectedSkillCategory: any;
 getSkillsFromOtherDeps(){
-  this.skillService.getUnendorsedSkills(this.employeeDetails.depId).subscribe(data=>{
+  this.skillService.getUnendorsedSkills(this.employeeDetails.userID).subscribe(data=>{
     console.log(data);
     this.skillsFromOtherDeps = data;
    },error=>{
