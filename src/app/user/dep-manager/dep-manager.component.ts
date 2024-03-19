@@ -210,7 +210,7 @@ skillCategoryy: any;
   skillCategories!: any[];
 selectedSkillCategory: any;
 getSkillsFromOtherDeps(){
-  this.skillService.getUnendorsedSkills(this.employeeDetails.userID).subscribe(data=>{
+  this.skillService.getUnendorsedSkills(this.employeeDetails.id).subscribe(data=>{
     console.log(data);
     this.skillsFromOtherDeps = data;
    },error=>{
@@ -344,7 +344,7 @@ ngOnInit(): void {
           this.getDeptEmployees();
           this.getUnassignedEmployees();
           this.getDepartmentSkills();
-          this.getSkillsFromOtherDeps()
+          this.getSkillsFromOtherDeps();
           this.getSkillCategories();
           this.fetchSkillStatistics();
           this.loadAssignmentProposals();
