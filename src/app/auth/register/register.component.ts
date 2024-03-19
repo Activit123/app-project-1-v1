@@ -80,7 +80,7 @@ orgId:any;
     },error=>{
      console.log(error);
      this.message = "Error on registration";
-     this.login();
+  
     });
   }
 }
