@@ -303,7 +303,7 @@ project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStat
   viewSkills(): void{
    // Toggle visibility on click
     if (this.employeeDetails.id) {
-      this.skillService.getAllSkills(this.employeeDetails.orgId)
+      this.skillService.getAllSkills(this.employeeDetails.id)
       .subscribe((data: any) => {
         // Assuming data is an array of skills
         console.log("intra");
