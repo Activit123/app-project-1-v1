@@ -232,6 +232,8 @@ assignSkillToDepartment(skillID:any) {
       this.getSkillsFromOtherDeps();
       this.getDepartmentSkills();
     },error=>{
+      this.getSkillsFromOtherDeps();
+      this.getDepartmentSkills();
       console.log(error);
     });
   }
@@ -265,8 +267,12 @@ addSkillToDepartment() {
    this.skillService.createSkill(this.adminId,this.skillName,this.skillDescription,this.selectedSkillCategory.name,[this.employeeDetails.depId]).subscribe(data=>{
     console.log(data);
     this.getDepartmentSkills();
+    this.getSkillsFromOtherDeps();
+      
    },error=>{
     console.log(error);
+    this.getSkillsFromOtherDeps();
+   
     this.getDepartmentSkills();
    });
 }
