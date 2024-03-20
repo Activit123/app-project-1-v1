@@ -20,6 +20,8 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './dep-manager.component.css'
 })
 export class DepManagerComponent implements OnInit,OnDestroy{
+allocationCount: any;
+deallocationCount: any;
 confirmDeallocationProposal(parg0: any, type: any, comment: any) {
   this.proposedEmployee = parg0;
   console.log("Comment:", comment);
@@ -262,7 +264,17 @@ toggleAssignmentProposals(): void {
     this.assignmentProposalService.getProposalsByDepartment(this.employeeDetails.depId).subscribe(data=>{
       console.log(data);
       this.assignmentProposals = data;
-      this.notificationCount = this.assignmentProposals.length;
+      var i = 0;
+      var j = 0;
+      for(let proposal of this.assignmentProposals){
+        if(proposal.workHours === null){
+          i+=1; 
+        }else{
+          j+=1;
+        }
+      }
+      this.allocationCount = j;
+      this.deallocationCount = i;
     },error=>{
       console.log(error);
     })

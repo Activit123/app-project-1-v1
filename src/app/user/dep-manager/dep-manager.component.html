@@ -10,9 +10,12 @@
   <div><strong>ID:</strong> {{ adminId }}</div>
   <p>Department Management Page</p>
   <div>
-    <span>Notifications: {{ notificationCount }}</span>
+    <span>Allocation Notifications: {{ allocationCount }}</span>
+
   </div>
-  
+  <div>  <span>Deallocation Notifications: {{ deallocationCount }}</span>
+  </div>
+
   <button (click)="toggleDepartmentMembers()">Department Members</button>
   <button (click)="showSkillsStatisticsPopup()">Show Statistics</button>
   <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
