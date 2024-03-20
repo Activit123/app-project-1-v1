@@ -81,7 +81,7 @@
         </select>
       </div>
       
-      <input type="text" [(ngModel)]="experience" placeholder="Experience">
+
       <button (click)="addSkillRequirement()">Add Skill Requirement</button>
       <label>Added Skills:</label>
       <ul>
@@ -116,14 +116,25 @@
   <div *ngIf="projectss" class="projects-grid">
     <h2>Projects</h2>
     <div class="project-item" *ngFor="let project of pagedProjects">
-      <h3>Name: {{ project.id }}</h3>
       <h3>Name: {{ project.name }}</h3>
       <p>Project Period: {{ project.prPeriod }}</p>
       <p>Start Date: {{ project.startD }}</p>
       <p>End Date: {{ project.endD }}</p>
       <p>Project Status: {{ project.prStatus }}</p>
       <p>Description: {{ project.description }}</p>
-      <button (click)="toggleProjectTeam(project.id)">Project Details View</button>
+      <p *ngIf="showDetails">Tech stack {{ project.description }}</p>
+      <label for="customRoles">Custom Roles:</label>
+     <div *ngIf="showDetails"> 
+      <li *ngFor="let role of project.customRoles">{{ role.key }} - {{ role.value }}</li>
+    </div>
+    <label for="skillRequirements">Skill Requirments:</label>
+    <div *ngIf="showDetails"> 
+      <li *ngFor="let skill of project.skillRequirements">{{ skill.key }} - {{ skill.value }}</li>
+    </div>
+       
+     
+      <button (click)="toggleProjectDetailss()">Project Details View</button>
+      <button (click)="toggleProjectTeam(project.id)">Project Team View</button>
       <!-- Add Update and Delete buttons -->
       <div *ngIf="showProjectTeam">
         <!-- Display project team -->
@@ -143,7 +154,14 @@
                     <li class="list-group-item" *ngFor="let role of user.value.value">{{ role }}</li>
                   </ul>
                 </div>
+                <button (click)="deallocationProposalEnable()">Deallocation Proposal</button>
+                <label  >{{message}}</label>
+                <input *ngIf="enabledealocation" [(ngModel)]="reason">
+               
+                <button *ngIf="enabledealocation" (click)="deallocationProposal(user.key,reason,project.id)">Send Deallocation</button>
+                
               </div>
+
               
             </div>
           </div>

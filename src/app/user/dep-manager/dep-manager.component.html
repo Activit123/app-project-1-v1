@@ -16,6 +16,7 @@
   <button (click)="toggleDepartmentMembers()">Department Members</button>
   <button (click)="showSkillsStatisticsPopup()">Show Statistics</button>
   <button (click)="toggleUnassignedDepartmentMembers()">Unassigned Members</button>
+  <button (click)="toggleDeallocationProposals()">Deallocation Proposals</button>
   <button (click)="toggleAssignmentProposals()">Assignment Proposals</button>
   <button (click)="toggleManageSkills()">Manage Skills</button>
   <div *ngIf="showDepartmentMembers">
@@ -23,16 +24,27 @@
     <!-- Assuming you have a list of department members -->
     <ul>
       <h3>Department Members</h3>
-      <li *ngFor="let employee of employees">"Employee:"{{employee.name}} <button (click)="removeMember(employee.id)">Remove Member</button>
+      <li *ngFor="let employee of employees">
+        <div class="employee-details">
+          <p>"Employee:" {{ employee.name }}</p>
+          <button (click)="removeMember(employee.id)">Remove Member</button>
+          <p>Department: {{ employee.depId }}</p>
+        </div>
         
-        <ul style="list-style: none; padding: 0;">
-          <p>Department: {{employee.depId}}</p>
-          <h3>Skills</h3>
-          <li *ngFor="let skill of employee.skills" style="display: flex; justify-content: space-between; align-items: center;">
-            <div>:{{ skill.key }}: {{ skill.value }}   </div>
-          </li>
-        </ul>
-      </li>
+        <div class="skill-cards-container">
+          <!-- Display skills as cards -->
+          <div class="skill-card" *ngFor="let skill of employee.skills">
+            <div class="card-body">
+              <h5 class="card-title">Skill ID: {{ skill.key }}</h5>
+              <p class="card-text">Level: {{ skill.value[0] }}</p>
+              <p class="card-text">Experience: {{ skill.value[1] }}</p>
+              <p class="card-text">Endorsements:</p>
+              <div *ngFor="let endorsement of skill.value.slice(2)" class="endorsement">
+                <p class="card-text">{{ endorsement }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
       <!-- Add more department members as needed -->
     </ul>
   </div>
@@ -42,20 +54,27 @@
     <h3>Unassigned Department Employees</h3>
     <ul>
       
-      <li *ngFor="let employee of employeesNotAssigned">"Employee:"{{employee.name}}
-      
-        <p>Department: {{employee.depId}}</p>
-
-        <ul style="list-style: none; padding: 0;">
-          <h3>Skills</h3>
-          <li *ngFor="let skill of employee.skills" style="display: flex; justify-content: space-between; align-items: center;">
-            
-            <div>:{{ skill.key }}: {{ skill.value }}</div>
-          </li>
-          <button (click)="addMember(employee.id)">Add Member to Department</button>
-        </ul>
-     
-      </li>
+      <li *ngFor="let employee of employeesNotAssigned">
+        <div class="employee-details">
+          <p>"Employee:" {{ employee.name }}</p>
+          <button (click)="addMember(employee.id)">Remove Member</button>
+          <p>Department: {{ employee.depId }}</p>
+        </div>
+        
+        <div class="skill-cards-container">
+          <!-- Display skills as cards -->
+          <div class="skill-card" *ngFor="let skill of employee.skills">
+            <div class="card-body">
+              <h5 class="card-title">Skill ID: {{ skill.key }}</h5>
+              <p class="card-text">Level: {{ skill.value[0] }}</p>
+              <p class="card-text">Experience: {{ skill.value[1] }}</p>
+              <p class="card-text">Endorsements:</p>
+              <div *ngFor="let endorsement of skill.value.slice(2)" class="endorsement">
+                <p class="card-text">{{ endorsement }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
    
       <!-- Add more department members as needed -->
     </ul>
@@ -68,6 +87,7 @@
       <div class="assignment-proposals">
         <div class="card" *ngFor="let proposal of assignmentProposals">
           <!-- Customize card layout to display proposal details -->
+          <ng-container *ngIf="proposal.customRoles !== null">
           <h4>Employee:{{ proposal.userID }}</h4>
           <p>Project:{{ proposal.projectID }}</p>
           <p>Work Hours{{ proposal.workHours }}</p>
@@ -86,6 +106,35 @@
             <option value="false">Reject</option>
           </select>
           <button (click)="confirmProposal(proposal,type,comment)">Confirm</button>
+        </ng-container>
+        </div>
+       
+      </div>
+    </div>
+    <div *ngIf="showdeallocationProposals">
+      <h3>Deallocation Proposals</h3>
+      <!-- Display assignment proposals as cards -->
+      <div class="assignment-proposals">
+        <div class="card" *ngFor="let proposal of assignmentProposals">
+          <!-- Customize card layout to display proposal details -->
+          <ng-container *ngIf="proposal.workHours === null">
+            <!-- Customize card layout to display proposal details -->
+            <h4>Employee:{{ proposal.userID }}</h4>
+            <p>Project:{{ proposal.projectID }}</p>
+            <p>Reason:{{ proposal.comment }}</p>
+            
+            <!-- Add more details as needed -->
+            <label>Reason</label>
+            <input placeholder="Comment" [(ngModel)]="comment" name="comment">
+            <p>Confirm or deny</p>
+            <select [(ngModel)]="type" name="confirmation">
+  
+              <option value="true">Confirm</option>
+              <option value="false">Reject</option>
+            </select>
+            <button (click)="confirmDeallocationProposal(proposal,type,comment)">Confirm</button>
+          </ng-container>
+         
         </div>
        
       </div>
@@ -140,7 +189,7 @@
     </div>
      
   
-      
+    
     
       <!-- Add more department members as needed -->
     </ul>

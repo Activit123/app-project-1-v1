@@ -53,10 +53,24 @@
         
         <!-- Skills section -->
         <div id="skillsDiv">
-          <h2>Add Skills</h2>
+        
           <div class="skill-grid">
-            <div *ngFor="let skill of employeeDetails.skills" class="skill-box">
-              <div>{{ getSkillName(skill) }}:Level{{ skill.key }}: Experience{{ skill.value }}</div>
+            <div *ngFor="let skill of employeeDetails.skills; let i = index"  class="skill-box">
+              
+              <div>ID{{ skill.key }}</div>
+            
+              <div>Level:{{ skill.value[0] }}</div>
+              <div>Experience:{{ skill.value[1] }}</div>
+              <div>Endorsements:</div>
+              <ng-container *ngFor="let endorsement of skill.value.slice(2)">
+                <!-- Check if endorsement contains any of the keywords -->
+                <ng-container *ngIf="containsKeyword(endorsement)">
+                  <div>{{ endorsement }}</div>
+                </ng-container>
+                <ng-container *ngIf="!containsKeyword(endorsement)">
+                  <div>{{ endorsement }}</div>
+                </ng-container>
+              </ng-container>
               <button (click)="showAddEndorsementPopup(skill)" class="btn btn-primary">Add Endorsement</button>
               <button (click)="deleteSkill(skill.key)" class="btn btn-danger">Delete Skill</button>
             </div>
@@ -74,7 +88,7 @@
                   <input type="text" placeholder="Title" [(ngModel)]="endorsementTitle">
                 </div>
                 <div *ngIf="endtype === 'Project'">
-                  <select [(ngModel)]="endorsementTitle">
+                  <select [(ngModel)]="endorsementTitlee">
                     <option *ngFor="let project of projects" [value]="project.id">{{ project.name }}</option>
                   </select>
                 </div>
@@ -111,8 +125,28 @@
         <div class="modal-dialog modal-dialog-centered">
           <h2>Add Skill Details for {{ selectedSkill.name }}</h2>
           <div class="modal-content popup-content">
-            <input type="text" placeholder="Level" [(ngModel)]="skillLevel">
-            <input type="text" placeholder="Experience (Years)" [(ngModel)]="skillExperience">
+            <div>
+              <label for="level">Level:</label>
+              <select id="level" [(ngModel)]="skillLevel">
+                <option value="1">1 - Learns</option>
+                <option value="2">2 - Knows</option>
+                <option value="3">3 - Does</option>
+                <option value="4">4 - Helps</option>
+                <option value="5">5 - Teaches</option>
+              </select>
+            </div>
+            <div>
+              <label for="level">Level:</label>
+              <select id="level" [(ngModel)]="skillExperience">
+                <option value="0-6 months">0-6 months</option>
+                <option value="6-12 months">6-12 months</option>
+                <option value="1-2 years">1-2 years</option>
+                <option value="2-4 years">4 - Helps</option>
+                <option value="4-7 years">4-7 years</option>
+                <option value=">7 years">>7 years</option>
+              </select>
+            </div>
+
             <button (click)="addSkill()">Add Skill</button>
           </div>
         </div>

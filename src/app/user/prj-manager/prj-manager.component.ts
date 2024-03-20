@@ -15,6 +15,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UpdateProjectPopupComponent } from './update-project-popup/update-project-popup.component';
 import { TeamFinderPopupComponent } from './team-finder-popup/team-finder-popup.component';
 import { TeamFinderServiceService } from '../../../services/teamFinderService/team-finder-service.service';
+import { MemberAssignmentService } from '../../../services/teamAssignment/member-assignment.service';
 interface Project {
   id?: string;
   name?: string;
@@ -38,6 +39,29 @@ interface Project {
   styleUrl: './prj-manager.component.css'
 })
 export class PrjManagerComponent implements OnInit,OnDestroy{
+reason: any;
+enabledealocation = false;
+message: any;
+deallocationProposalEnable() {
+this.enabledealocation = !this.enabledealocation;
+}
+deallocationProposal(userID: any,reason: any,projectid:any) {
+  const userIDD = userID;
+  const reasonn = reason
+  const projectidd = projectid;
+    this.assignmentProposalService.deallocationProposal(userIDD,projectidd,reasonn).subscribe(data=>{
+    console.log(data);
+    this.enabledealocation = !this.enabledealocation;
+    this.message = "Deallocation request sent";
+   },error=>{
+    console.log(error);
+   });
+}
+
+showDetails = false;
+toggleProjectDetailss() {
+this.showDetails = !this.showDetails;
+}
 projectUsers: any;
 notificationCount: any;
 createTeam(projectID:any) {
@@ -234,7 +258,7 @@ addRole() {
 employeeDetails: any = "";
 
 project: any = { name: '', orgId: '', prPeriod: '', StartD: '', EndD: '', PrStatus: '', description: '', projectManagerID: '', customRoles: [], skillRequirements: [] }; // Initialize project object with empty values
-  constructor(private dialog: MatDialog,private route:ActivatedRoute,private router:Router, private authService:AuthService,private teamFindService:TeamFinderServiceService, private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
+  constructor(private dialog: MatDialog,private assignmentProposalService:MemberAssignmentService, private route:ActivatedRoute,private router:Router, private authService:AuthService,private teamFindService:TeamFinderServiceService, private skillService: SkillService,private projectService:ProjectService,private roleService:RolesService){
 
   }
 

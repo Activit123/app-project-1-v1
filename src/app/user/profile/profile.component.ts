@@ -17,9 +17,26 @@ import { ProjectService } from '../../../services/projectService/project.service
     imports: [NgIf, CommonModule, RouterLink, SkillsComponent,FormsModule]
 })
 export class ProfileComponent implements OnInit,OnDestroy{
+getSkillName(arg0: any) {
+  const skillid = arg0;
+  var skillname:any;
+    for(let skillname  of this.skills){
+      if(skillid === skillname.id){
+          console.log("intra aici");
+          return skillname.name;
+      }
+}
+return skillname;
+}
+  containsKeyword(endorsement: string): boolean {
+    const keywords = ['Title', 'Course', 'Project'];
+    return keywords.some(keyword => endorsement.includes(keyword));
+  }
 selectedProject: any;
+endorsementTitlee: any;
   addEndorsement() {
     // Call the API to add the endorsement
+    console.log(this.endorsementTitle);
     this.skillService.addSkillEndorsement(
       this.employeeDetails.id,
       this.selectedSkill.key, // Assuming this is the skill ID
@@ -55,9 +72,18 @@ showPastProjects = false;
 currentProjects: any;
 pastProjects: any;
 notificationCount: any;
-getSkillName(sakillID: any) {
-  console.log(sakillID.key);
-  const skillid = sakillID;
+skillnameList:any;
+getSkillNames() {
+  
+
+ for(let skill of this.employeeDetails.skills){
+  for(let skillname  of this.skills){
+    if(skill.id === skillname.id){
+        this.skillnameList.push(skillname.name);
+    }
+  }
+ }
+  console.log(this.skillnameList);
   
 }
 deleteSkill(skillID:any) { 
@@ -171,6 +197,7 @@ isNavigating = false;
             });
             this.takeAllskills();
             this.fetchProjects();
+           // this.getSkillNames();
            // console.log(this.deptName);
             //this.employeeDetails.depId = this.deptName;
 

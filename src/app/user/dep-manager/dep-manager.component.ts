@@ -20,6 +20,38 @@ import { MatDialog } from '@angular/material/dialog';
   styleUrl: './dep-manager.component.css'
 })
 export class DepManagerComponent implements OnInit,OnDestroy{
+confirmDeallocationProposal(parg0: any, type: any, comment: any) {
+  this.proposedEmployee = parg0;
+  console.log("Comment:", comment);
+  this.proposedEmployee.comment = comment;
+  console.log("Type:", type);
+  this.proposedEmployee.type = type;
+  console.log("Proposed Employee:", this.proposedEmployee);
+
+  this.assignmentProposalService.updateDeleteDeallocationProposal(this.proposedEmployee.userID,
+    this.proposedEmployee.id,this.proposedEmployee.comment,
+    this.proposedEmployee.type).subscribe(
+    (data) => {
+      console.log("Update/Delete Proposal Data:", data);
+      this.handleDeallocation(type);
+    },
+    (error) => {
+      console.log("Update/Delete Proposal Error:", error);
+      this.loadAssignmentProposals();
+    }
+  );
+}
+showdeallocationProposals = false;
+toggleDeallocationProposals() {
+  console.log(this.showdeallocationProposals);
+this.showdeallocationProposals = !this.showdeallocationProposals;
+}
+deallocationProposals:any;
+
+  containsKeyword(endorsement: string): boolean {
+    const keywords = ['Title', 'Course', 'Project'];
+    return keywords.some(keyword => endorsement.includes(keyword));
+  }
 notificationCount: any;
 showSkillsStatisticsPopup() {
   this.skillService.getSkillStatistics(this.employeeDetails.id).subscribe(
@@ -135,6 +167,25 @@ createLevelBasedPieCharts(): void {
     this.levelCharts.push(levelChart);
   });
 }
+handleDeallocation(type:any){
+  if (type) {
+    console.log("Project ID:", this.proposedEmployee.projectID);
+    this.teamService.getTeamForProject(this.proposedEmployee.projectID).subscribe(
+      (data) => {
+        console.log("Team Data:", data);
+        console.log("Inside get team");
+        this.teamid = data[0].id; // Initialize to empty object if data is null
+        console.log("Team ID:", this.teamid);
+        this.updateTeamMember(this.teamid,this.proposedEmployee.userID);
+        this.loadAssignmentProposals();
+      },
+      (error) => {
+        console.log("Get Team Error:", error);
+        this.loadAssignmentProposals();
+      }
+    );
+  }
+}
 handleAdditionalOperations(type: any) {
   if (type) {
     console.log("Project ID:", this.proposedEmployee.projectID);
@@ -153,7 +204,26 @@ handleAdditionalOperations(type: any) {
     );
   }
 }
-
+updateTeamMember(teamid:any,userid:any){
+  const teami = teamid;
+  const ussr = userid;
+  console.log("Team ID:", teami); // Logging here to ensure this.teamid is defined
+  this.teamService.updateTeamForProject(
+    this.proposedEmployee.projectID,
+    teami,
+    this.proposedEmployee.userID,
+    this.proposedEmployee.workHours,
+    this.proposedEmployee.customRoles
+  ).subscribe(
+    (data) => {
+      console.log("Update Team Data:", data);
+      this.loadAssignmentProposals();
+    },
+    (error) => {
+      console.log("Update Team Error:", error);
+    }
+  );
+}
 updateTeam(teamid:any) {
   const teami = teamid;
   console.log("Team ID:", teami); // Logging here to ensure this.teamid is defined

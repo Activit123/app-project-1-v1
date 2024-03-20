@@ -174,3 +174,31 @@ button:hover {
   .skill-card:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   }
+  .skill-card {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-weight: bold;
+  }
+  
+  .endorsement {
+    padding-left: 20px;
+  }
+  
+  .employee-details {
+    margin-bottom: 10px;
+  }
+  
+  .skill-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  

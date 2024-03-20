@@ -59,7 +59,22 @@ export class TeamFinderServiceService {
     }
     return this.http.post<any>(`${this.apiUrl}/CreateEmptyTeam?projectId=${projectId}`,body);
   }
+  deleteTeamMemberForProject(teamId:any,userId:any): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    const userid = userId;
+    const teamid= teamId;
+
   
+
+  
+    return this.http.delete<any>(`${this.apiUrl}/RemoveTeamMember?teamId=${teamid}&memberId=${userid}`);
+  }
+
   updateTeamForProject(projectId:any,teamId:any,userId:any,workHours:any,customRole:any): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
