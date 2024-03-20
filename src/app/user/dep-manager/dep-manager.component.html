@@ -57,7 +57,7 @@
       <li *ngFor="let employee of employeesNotAssigned">
         <div class="employee-details">
           <p>"Employee:" {{ employee.name }}</p>
-          <button (click)="addMember(employee.id)">Remove Member</button>
+          <button (click)="addMember(employee.id)">Add Member</button>
           <p>Department: {{ employee.depId }}</p>
         </div>
         
