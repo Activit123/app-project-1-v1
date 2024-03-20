@@ -35,8 +35,8 @@ export class MemberAssignmentService {
     return this.http.post<any>(url,null);
   }
 
-  updateDeleteDeallocationProposal(managerUserId: string, proposalId: string, reason: string, type: boolean): Observable<any> {
-    const url = `${this.apiUrl}/UpdateDeleteDeallocationProposal?managerUserId=${managerUserId}&proposalId=${proposalId}&reason=${reason}&type=${type}`;
+  updateDeleteDeallocationProposal(managerUserId: string, proposalId: string,projectID:string, reason: string, type: boolean): Observable<any> {
+    const url = `${this.apiUrl}/UpdateDeleteDeallocationProposal?managerUserId=${managerUserId}&projectId=${projectID}&proposalId=${proposalId}&reason=${reason}&type=${type}`;
     return this.http.post<any>(url,null);
   }
 }

@@ -29,11 +29,12 @@ confirmDeallocationProposal(parg0: any, type: any, comment: any) {
   console.log("Proposed Employee:", this.proposedEmployee);
 
   this.assignmentProposalService.updateDeleteDeallocationProposal(this.proposedEmployee.userID,
-    this.proposedEmployee.id,this.proposedEmployee.comment,
+    this.proposedEmployee.id,this.proposedEmployee.projectID,this.proposedEmployee.comment,
     this.proposedEmployee.type).subscribe(
     (data) => {
       console.log("Update/Delete Proposal Data:", data);
-      this.handleDeallocation(type);
+      //this.handleDeallocation(type);
+      this.loadAssignmentProposals();
     },
     (error) => {
       console.log("Update/Delete Proposal Error:", error);
@@ -176,8 +177,8 @@ handleDeallocation(type:any){
         console.log("Inside get team");
         this.teamid = data[0].id; // Initialize to empty object if data is null
         console.log("Team ID:", this.teamid);
-        this.updateTeamMember(this.teamid,this.proposedEmployee.userID);
-        this.loadAssignmentProposals();
+       // this.updateTeamMember(this.teamid,this.proposedEmployee.userID);
+      this.loadAssignmentProposals();
       },
       (error) => {
         console.log("Get Team Error:", error);
