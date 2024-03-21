@@ -18,7 +18,6 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
-    width: auto;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -71,12 +70,10 @@ button:hover {
 /* Menu Styles */
 .menu {
     display: flex;
-    align-items: center;
     flex-direction: column;
     background-color: #f8f9fa; /* Light gray background color */
     border-radius: 8px; /* Rounded corners */
     padding: 10px; /* Add padding */
-    
   }
   
   .menu a {
@@ -86,7 +83,6 @@ button:hover {
     padding: 8px 15px; /* Add padding to each menu item */
     margin-bottom: 5px; /* Add margin between menu items */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-    align-items: center;
   }
   
   .menu a:hover {
@@ -110,7 +106,10 @@ button:hover {
     padding: 20px;
 }
 
-
+.menu {
+    justify-content: flex-end;
+    gap: 10px;
+}
 
 .container p {
     font-size: 20px;
