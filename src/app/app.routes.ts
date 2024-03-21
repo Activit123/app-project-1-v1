@@ -2,6 +2,10 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [ 
     {
+        path: "",
+        loadChildren:()=>import ("./auth/auth.routes").then((m)=>m.loginRoutes)
+    },
+    {
         path: "signup",
         loadChildren:()=>import ("./auth/auth.routes").then((m)=>m.registerRoutes)
     },

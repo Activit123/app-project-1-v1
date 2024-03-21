@@ -1,6 +1,7 @@
 <!-- profile.component.html -->/*
 <div class="container">
   <!-- Menu -->
+  
   <div *ngIf="employeeDetails" class="menu">
     <!-- Menu items -->
     <div>
@@ -10,11 +11,13 @@
     <a *ngIf="employeeDetails.roles.includes('OrganizationAdmin')" [routerLink]="['/admin',employeeDetails.id]">Organization Admin</a>
     <a *ngIf="employeeDetails.roles.includes('DepartmentManager')" [routerLink]="['/department',employeeDetails.id]">Department Manager</a>
     <a *ngIf="employeeDetails.roles.includes('ProjectManager')" [routerLink]="['/project',employeeDetails.id]">Project Manager</a>
-    <button (click)="logout()">Logout</button>
+    <button class="logout-button" (click)="logout()">Logout</button>
+
   </div>
   <div class="profile-container">
       <!-- Profile details -->
-      <h2>Profile</h2>
+      <h2 class="profile-heading">Profile</h2>
+
       <div class="profile-details" *ngIf="employeeDetails">
         <!-- Profile information -->
         <div><strong>ID:</strong> {{ employeeDetails.id }}</div>
@@ -106,7 +109,7 @@
         
       </div>
       <!-- Button to add skills -->
-      <button (click)="viewSkills()">Add Skills</button>
+      <button  (click)="viewSkills()">Add Skills</button>
       <!-- Skills section -->
       <div id="skillsDiv" *ngIf="showSkills">
         <h2>Add Skills</h2>
@@ -115,7 +118,7 @@
             <h3>{{ skill.name }}</h3>
             <p>{{ skill.description }}</p>
             <p>Author ID: {{ skill.authorID }}</p>
-            <button (click)="showAddSkillPopup(skill)" class="btn btn-primary">Add Skill Details</button>
+            <button class="logout-button" (click)="showAddSkillPopup(skill)" class="btn btn-primary">Add Skill Details</button>
           </div>
         </div>
       </div>

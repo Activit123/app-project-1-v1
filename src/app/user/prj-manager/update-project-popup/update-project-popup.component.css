@@ -1,56 +1,57 @@
 .modal-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
-    display: flex;
-    justify-content: center; /* Center the modal horizontally */
-    align-items: center; /* Center the modal vertically */
-  }
-  
-  .modal-content {
-    background-color: white;
-    width: 400px; /* Adjust the width as needed */
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add shadow effect */
-  }
-  
-  .modal-content h2 {
-    margin-top: 0;
-  }
-  
-  .modal-content label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .modal-content input {
-    width: calc(100% - 10px); /* Take up the remaining width */
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  .modal-content button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 4px;
-    background-color: #007bff; /* Blue color */
-    color: white;
-    cursor: pointer;
-  }
-  
-  .modal-content button:last-child {
-    margin-right: 0;
-    background-color: #dc3545; /* Red color */
-  }
-  
-  .modal-content button:hover {
-    opacity: 0.8;
-  }
-  
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center; /* Center the modal horizontally */
+  align-items: center; /* Center the modal vertically */
+}
+
+.modal-content {
+  background-color: white;
+  width: 400px; /* Adjust the width as needed */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Add shadow effect */
+  overflow-y: auto; /* Add vertical scrollbar if content overflows */
+  max-height: 80%; /* Limit height and add scrollbar if content height exceeds this value */
+}
+
+.modal-content h2 {
+  margin-top: 0;
+}
+
+.modal-content label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal-content input {
+  width: calc(100% - 10px); /* Take up the remaining width */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.modal-content button {
+  padding: 10px 20px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #007bff; /* Blue color */
+  color: white;
+  cursor: pointer;
+}
+
+.modal-content button:last-child {
+  margin-right: 0;
+  background-color: #dc3545; /* Red color */
+}
+
+.modal-content button:hover {
+  opacity: 0.8;
+}

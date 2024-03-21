@@ -1,91 +1,25 @@
-/* login.component.css */
-
-form {
-  width: 100px;
-  margin: 0 auto;
-  text-align: center;
-}
-
-/* input {
-  width: calc(100% - 22px); 
-  padding: 10px;
-  margin-bottom: 10px;
-} */
-
-/* button {
-  width: calc(100% - 22px);  
-  padding: 10px;
-  background-color: #ab8ae9;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-} */
-
-/* button:hover {
-  background-color: #ab8ae9;
-} */
-
-.error-message {
-  color: red;
-  margin-top: 10px;
-}
-
-/* Profile Component Styles */
-/* .profile-details {
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  padding: 20px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.profile-details p {
-  margin: 10px 0;
-}
-
-.profile-details strong {
-  font-weight: bold;
-}
-
-.profile-details ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-.profile-details ul li {
-  margin-bottom: 5px;
-}
-
-.profile-details ul li:before {
-  content: '•';
-  margin-right: 5px;
-  color: #ff6b6b;
-}
-
-.profile-details ul li:first-child:before {
-  content: ''; /* Hide bullet for the first item 
-} */
-
-
-/* Backgrounds */
-/* .section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  width: 100%;
-  background-color: #fff;
-} */
-.body {
+/* login.component.css *//* Common styles for all devices */
+#login {
   width: 100%;
   height: 100%;
   background-color: #fff;
-}
-.backgrounds div {
+  overflow: hidden; /* Eliminate overflow-y */
+  justify-content: center;
+  align-items: center;
+}.section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 150%;
+  width: 100%;
+  background-color: #fff;
+}.body {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+}/* .backgrounds div {
   position: absolute;
-}
-
+} *//* Background styles for all devices */
 .bg-main {
   width: 150%;
   height: 150%;
@@ -96,9 +30,7 @@ form {
   border-radius: 0 0 0 10rem;
   opacity: 0.9;
   z-index: 1;
-}
-
-.bg-1 {
+}.bg-1 {
   width: 50%;
   height: 100%;
   background: linear-gradient(transparent 60%, #ff26ac, #f724db);
@@ -106,9 +38,7 @@ form {
   right: -10%;
   transform: rotateZ(-15deg) skewX(30deg);
   border-radius: 0 0 0 5rem;
-}
-
-.bg-2 {
+}.bg-2 {
   width: 50%;
   height: 100%;
   background: linear-gradient(transparent 70%, #ca5995, #fe945a);
@@ -119,56 +49,50 @@ form {
   z-index: 2;
   opacity: 0.4;
   box-shadow: 7rem 4rem 6rem rgba(0, 0, 0, 0.9);
-}
-/* End of Backgrounds */
-/* Account */
-.register {
-  scale: 1.8;
+}/* Account styles for all devices */
+.account {
+  /* scale: 1.8;
   position: absolute;
-  top: 40%;
-  left: 60%;
-  z-index: 7;
-}
-.register-wrapper {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 7; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
+}.account-wrapper {
+  height: 500px; /* Adjust wrapper width if necessary */
+  max-width: 90%; /* Limit wrapper width for smaller screens */
+  width: 450px;
   display: flex;
-  flex-direction: column;
+
   align-items: center;
   position: relative;
-}
-
-.register-header {
+}.account-header {
   text-align: center;
-}
-
-.register-header h1 {
+}.account-header h1 {
   font-size: 6rem;
   letter-spacing: 0.2rem;
   color: #263b53;
-}
-
-.register-header h3 {
+}.account-header h3 {
   font-size: 3rem;
   font-weight: 300;
   color: #567599;
   margin: 2rem 0 12rem 0;
-}
-
-.register-form-wrapper {
-  width: 50rem;
-  height: 50rem;
+}.account-form-wrapper {
+  width: 100%;
+  height: auto;
   background-color: #fdfdfd;
-  box-shadow: 0 1rem 8rem rgba(130, 162, 235, 0.3);
+  box-shadow: 0 1rem 8rem rgb(128 92 252);
   z-index: 10;
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 3rem 2rem;
-}
-
-.register-form-wrapper > span {
+  padding: 1rem 2rem;
+}.account-form-wrapper > span {
   width: 9rem;
   height: 9rem;
   background-color: #afc8ff;
@@ -179,16 +103,20 @@ form {
   font-size: 6rem;
   color: #3776ff;
   margin-bottom: 3rem;
-}
-
-/* .register-inputs {
+}.container {
+  display: grid;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+}.account-inputs {
   display: flex;
   flex-direction: column;
-} */
-
-.register input {
-  width: 40rem;
-  height: 5rem;
+  align-items: center;
+}.account-inputs input {
+  /* width: 40rem;
+  height: 5rem; */
   background-color: #f0f2f4;
   margin-bottom: 3rem;
   border: none;
@@ -196,55 +124,41 @@ form {
   padding: 0.5rem 1rem;
   font-size: 1.6rem;
   color: #444;
-}
-
-/* .register-inputs input::placeholder {
+}.account-inputs input::placeholder {
   color: #888;
-} */
-
-.register-check {
+}.account-check {
   margin: -2rem 0 3rem 0;
-}
-
-.register-check input {
+}.account-check input {
   cursor: pointer;
-}
-
-.register-check label {
+}.account-check label {
   font-size: 1.6rem;
   font-weight: 300;
   color: #777;
   cursor: pointer;
-}
-
-.register-form-wrapper button {
-  width: 100%;
-  height: 20%;
-  background-color: #4d298f;
+}.account-form-wrapper button {
+  width: 230px;
+  height: 60px;
+  background-color: #70C6FF;
   border: none;
-  border-radius: 4rem;
-  font-size: 1.5rem;
+  border-radius: 25px;
+  font-size: 1.3rem;
   font-weight: bold;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 0.1rem;
   cursor: pointer;
-  margin: 1.5rem 0;
+  margin: 0.5rem 0;
+  
 }
-
-.register-form-wrapper p {
+.account-form-wrapper p {
   font-size: 1.8rem;
   font-weight: 300;
   text-align: center;
-}
-
-.register-form-wrapper p span {
-  color: #2371ff;
+}.account-form-wrapper p span {
+  color: #4d298f;
   font-weight: 400;
   cursor: pointer;
-}
-
-.btn-out {
+}.btn-out {
   width: 35rem;
   height: 5rem;
   background: linear-gradient(to right, #ff48bf, #ff3393);
@@ -257,35 +171,56 @@ form {
   letter-spacing: 0.1rem;
   cursor: pointer;
   margin-top: 4rem;
-}
-/* End of Account */
-/* Banner */
+}/* Banner styles for all devices */
 .banner {
   position: absolute;
   top: 15%;
   left: 12%;
   z-index: 10;
-}
-
-.banner h1 {
+}.banner h1 {
   font-family: "Mooli", cursive;
   font-size: 30rem;
   color: #fff;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
-}
-
-.banner h3 {
+}.banner h3 {
   font-family: "Mooli", cursive;
   font-size: 10rem;
-  top:6000px;
+  top: 3000%;
   font-weight: 100;
   text-transform: uppercase;
   color: #fff;
   text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
-  margin-left: 15rem; /* Adaugă un spațiu de 2rem între h3 și marginea stângă */
+  margin-left: 15rem; /* Add a space of 2rem between h3 and the left edge */
+}/* Media Query for smaller devices like smartphones */
+@media only screen and (max-width: 768px) {
+  .account {
+    scale: 1; /* Reset scale for smaller devices */
+    top: 50%; /* Adjust position */
+    left: 50%; /* Adjust position */
+    transform: translate(-50%, -50%);
+  }  .account-form-wrapper {
+    width: 90%; /* Adjust width */
+    height: auto; /* Adjust height */
+    padding: 2rem; /* Adjust padding */
+  }  .account-form-wrapper > span {
+    font-size: 4rem; /* Adjust font size */
+    margin-bottom: 2rem; /* Adjust margin */
+  }  .account-inputs input {
+    width: 100%; /* Adjust width */
+  }  /* Additional responsive adjustments */
+  /* .backgrounds div {
+    display: none; /* Hide backgrounds on smaller devices */  .banner {
+    display: none; /* Hide banner on smaller devices */
+  }
+}.backgrounds {
+  width: 100%;
+  height: 100%;
+}.bottom-image {
+  display: grid;
+  align-items: end;
+}.account {
+  position: absolute;
+}.logo > img {
+  width: 200px;
+  margin-bottom: 20px
 }
-
-/* End of Banner */
-
-
-

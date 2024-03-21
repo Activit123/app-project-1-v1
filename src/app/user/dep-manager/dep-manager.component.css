@@ -18,6 +18,7 @@ button {
     background-color: #007bff;
     color: white;
     border: none;
+    width: auto;
     border-radius: 5px;
     cursor: pointer;
 }
@@ -70,25 +71,28 @@ button:hover {
 /* Menu Styles */
 .menu {
     display: flex;
+    align-items: center;
     flex-direction: column;
     background-color: #f8f9fa; /* Light gray background color */
     border-radius: 8px; /* Rounded corners */
     padding: 10px; /* Add padding */
-}
-
-.menu a {
+    
+  }
+  
+  .menu a {
     text-decoration: none;
     color: #333; /* Default text color */
     font-size: 16px; /* Font size */
     padding: 8px 15px; /* Add padding to each menu item */
     margin-bottom: 5px; /* Add margin between menu items */
     transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-}
-
-.menu a:hover {
+    align-items: center;
+  }
+  
+  .menu a:hover {
     background-color: #007bff; /* Change background color on hover */
     color: #fff; /* Change text color on hover */
-}
+  }
 
 .popup-content {
     position: fixed;
@@ -106,10 +110,7 @@ button:hover {
     padding: 20px;
 }
 
-.menu {
-    justify-content: flex-end;
-    gap: 10px;
-}
+
 
 .container p {
     font-size: 20px;

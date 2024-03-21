@@ -1,0 +1,24 @@
+.statistics-popup {
+    max-height: 600px; /* Increase the maximum height */
+    overflow-y: auto; /* Add vertical scrollbar if content overflows */
+  }
+  
+  /* Adjustments for the charts if necessary */
+  canvas {
+    display: block;
+    margin: auto;
+  }
+  .statistics-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Adjust as needed */
+  }
+  
+  .user-statistics {
+    flex: 0 0 calc(33.33% - 20px); /* Adjust width of each item */
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  

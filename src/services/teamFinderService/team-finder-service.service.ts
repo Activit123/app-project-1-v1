@@ -18,14 +18,14 @@ export class TeamFinderServiceService {
 
     return this.http.get<any>(`${this.apiUrl}/FindTeamMembers?orgId=${orgID}&projectId=${projectId}&includePartiallyAvailable=${includePartiallyAvailable}&weeksToProjectCompletion=${weeksToProjectCompletion}&includeUnavailable=${includeUnavailable}&includeCloseToFinish=${includeCloseToFinish}`, httpOptions);
   }
-  teamFinderAI(orgID: any, projectId: any,prompt:any): Observable<any> {
+  teamFinderAI(orgID: any, projectId: any,prompt:string): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'
       })
     };
 
-    return this.http.get<any>(`${this.apiUrl}/FindTeamMembersAI?orgId=${orgID}&projectId=${projectId}&prompt=${prompt}`, httpOptions);
+    return this.http.get<any>(`${this.apiUrl}/FindTeamMembersAI?orgId=${orgID}&projectId=${projectId}&prompt=${prompt}`);
   }
   getTeamForProject(projectId: any): Observable<any> {
     const httpOptions = {

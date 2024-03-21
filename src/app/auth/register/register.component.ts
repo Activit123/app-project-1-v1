@@ -13,6 +13,9 @@ import { AuthService } from '../../../services/authService/auth.service';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+onSubmit() {
+throw new Error('Method not implemented.');
+}
 orgDetails: any;
 message: any;
 

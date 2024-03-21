@@ -1,242 +1,241 @@
 /* login.component.css */
 
 form {
-    width: 300px;
-    margin: 0 auto;
-    text-align: center;
+  width: 300px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 input {
-    width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
-    padding: 10px;
-    margin-bottom: 10px;
+  width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
+  padding: 10px;
+  margin-bottom: 10px;
 }
 
 button {
-    width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
-    padding: 8px; /* Reduce padding to make buttons smaller */
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+  width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
+  padding: 8px; /* Reduce padding to make buttons smaller */
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
 
 button:hover {
-    background-color: #0056b3;
+  background-color: #0056b3;
 }
 
 .error-message {
-    color: red;
-    margin-top: 10px;
+  color: red;
+  margin-top: 10px;
 }
 
 /* Profile Component Styles */
 .profile-details {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .profile-details p {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .profile-details strong {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .profile-details ul {
-    list-style-type: none;
-    padding: 0;
+  list-style-type: none;
+  padding: 0;
 }
 
 .profile-details ul li {
-    margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .profile-details ul li:before {
-    content: '•';
-    margin-right: 5px;
-    color: #ff6b6b;
+  content: '•';
+  margin-right: 5px;
+  color: #ff6b6b;
 }
 
 .profile-details ul li:first-child:before {
-    content: ''; /* Hide bullet for the first item */
+  content: ''; /* Hide bullet for the first item */
 }
 
 /* Menu Styles */
 .menu {
-    display: flex;
-    flex-direction: column;
-    background-color: #f8f9fa; /* Light gray background color */
-    border-radius: 8px; /* Rounded corners */
-    padding: 10px; /* Add padding */
+  display: flex;
+  flex-direction: column;
+  background-color: #f8f9fa; /* Light gray background color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Add padding */
 }
 
 .menu a {
-    text-decoration: none;
-    color: #333; /* Default text color */
-    font-size: 16px; /* Font size */
-    padding: 8px 15px; /* Add padding to each menu item */
-    margin-bottom: 5px; /* Add margin between menu items */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+  text-decoration: none;
+  color: #333; /* Default text color */
+  font-size: 16px; /* Font size */
+  padding: 8px 15px; /* Add padding to each menu item */
+  margin-bottom: 5px; /* Add margin between menu items */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition */
 }
 
 .menu a:hover {
-    background-color: #007bff; /* Change background color on hover */
-    color: #fff; /* Change text color on hover */
+  background-color: #007bff; /* Change background color on hover */
+  color: #fff; /* Change text color on hover */
 }
 
 .popup-content {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    /* Add other styles for padding, background, etc. */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* Add other styles for padding, background, etc. */
 }
 
 /* Additional styles added */
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
 }
 
 .menu {
-    justify-content: flex-end;
-    gap: 10px;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .container p {
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 20px;
 }
 
 #departmentDetailsDiv ul,
 #teamRoleDetailsDiv ul,
 #employeeDetailsDiv ul {
-    padding: 0;
+  padding: 0;
 }
 
 #departmentDetailsDiv li,
 #teamRoleDetailsDiv li,
 #employeeDetailsDiv li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-    border: 1px solid #ddd; /* Add border to list items */
-    padding: 10px; /* Add padding to list items */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  border: 1px solid #ddd; /* Add border to list items */
+  padding: 10px; /* Add padding to list items */
 }
 
 #departmentDetailsDiv li button,
 #teamRoleDetailsDiv li button,
 #employeeDetailsDiv li button {
-    padding: 5px 10px; /* Reduce padding to make buttons smaller */
+  padding: 5px 10px; /* Reduce padding to make buttons smaller */
 }
 
 #departmentDetailsDiv li button:last-child,
 #teamRoleDetailsDiv li button:last-child,
 #employeeDetailsDiv li button:last-child {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 /* profile.component.css */
 
 /* Profile Details */
 .profile-details {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  /* Project Cards */
-  .project-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .project-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    width: calc(33.33% - 20px); /* Adjust width as needed */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .project-card h4 {
-    margin-top: 0;
-  }
-  
-  /* Skill Cards */
-  .skill-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
-  }
-  
-  .skill-card {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    width: calc(33.33% - 20px); /* Adjust width as needed */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .skill-card h4 {
-    margin-top: 0;
-  }
-  
-  /* Buttons */
-  .buttons {
-    margin-top: 20px;
-  }
-  
-  .buttons button {
-    margin-right: 10px;
-  }
-  .project-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .project-box {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .project-box h3 {
-    margin-top: 0;
-  }
-  .skill-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 20px;
-  }
-  
-  .skill-box {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .skill-box h3 {
-    margin-top: 0;
-  }
-  
-  
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Project Cards */
+.project-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.project-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(33.33% - 20px); /* Adjust width as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-card h4 {
+  margin-top: 0;
+}
+
+/* Skill Cards */
+.skill-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.skill-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: calc(33.33% - 20px); /* Adjust width as needed */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-card h4 {
+  margin-top: 0;
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 20px;
+}
+
+.buttons button {
+  margin-right: 10px;
+}
+.project-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.project-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.project-box h3 {
+  margin-top: 0;
+}
+.skill-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.skill-box {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-box h3 {
+  margin-top: 0;
+}
+

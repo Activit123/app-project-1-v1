@@ -88,6 +88,8 @@ findTeam(enabled:boolean,prompt:any) {
  }else{
   this.employees = null;
   const p = prompt;
+  console.log(this.data.orgID);
+  console.log(this.data.project.id);
   console.log(p);
   this.teamfinder.teamFinderAI(this.data.orgID,this.data.project.id,p).subscribe(data=>{
     

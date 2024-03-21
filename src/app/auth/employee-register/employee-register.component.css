@@ -1,91 +1,226 @@
-/* login.component.css */
-
-form {
-    width: 300px;
-    margin: 0 auto;
-    text-align: center;
-}
-
-input {
-    width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
-    padding: 10px;
-    margin-bottom: 10px;
-}
-
-button {
-    width: calc(100% - 22px); /* Subtract the padding and border width from 100% */
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-.error-message {
-    color: red;
-    margin-top: 10px;
-}
-
-/* Profile Component Styles */
-.profile-details {
+/* login.component.css *//* Common styles for all devices */
+#login {
+    width: 100%;
+    height: 100%;
     background-color: #fff;
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.profile-details p {
-    margin: 10px 0;
-}
-
-.profile-details strong {
-    font-weight: bold;
-}
-
-.profile-details ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-.profile-details ul li {
-    margin-bottom: 5px;
-}
-
-.profile-details ul li:before {
-    content: '•';
-    margin-right: 5px;
-    color: #ff6b6b;
-}
-
-.profile-details ul li:first-child:before {
-    content: ''; /* Hide bullet for the first item */
-}
-
-/* Menu Styles */
-.menu {
+    overflow: hidden; /* Eliminate overflow-y */
+    justify-content: center;
+    align-items: center;
+  }.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 150%;
+    width: 100%;
+    background-color: #fff;
+  }.body {
+    width: 100%;
+    height: 100%;
+    background-color: #fff;
+  }/* .backgrounds div {
+    position: absolute;
+  } *//* Background styles for all devices */
+  .bg-main {
+    width: 150%;
+    height: 150%;
+    background: linear-gradient(to left, transparent, #4400c5, #4400ab);
+    top: -95%;
+    left: -10%;
+    transform: rotateZ(-15deg) skewX(30deg);
+    border-radius: 0 0 0 10rem;
+    opacity: 0.9;
+    z-index: 1;
+  }.bg-1 {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(transparent 60%, #ff26ac, #f724db);
+    top: -40%;
+    right: -10%;
+    transform: rotateZ(-15deg) skewX(30deg);
+    border-radius: 0 0 0 5rem;
+  }.bg-2 {
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(transparent 70%, #ca5995, #fe945a);
+    top: -60%;
+    right: 10%;
+    transform: rotateZ(-15deg) skewX(30deg);
+    border-radius: 0 0 0 5rem;
+    z-index: 2;
+    opacity: 0.4;
+    box-shadow: 7rem 4rem 6rem rgba(0, 0, 0, 0.9);
+  }/* Account styles for all devices */
+  .account {
+    /* scale: 1.8;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 7; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }.account-wrapper {
+    height: 500px; /* Adjust wrapper width if necessary */
+    max-width: 90%; /* Limit wrapper width for smaller screens */
+    width: 450px;
+    display: flex;
+  
+    align-items: center;
+    position: relative;
+  }.account-header {
+    text-align: center;
+  }.account-header h1 {
+    font-size: 6rem;
+    letter-spacing: 0.2rem;
+    color: #263b53;
+  }.account-header h3 {
+    font-size: 3rem;
+    font-weight: 300;
+    color: #567599;
+    margin: 2rem 0 12rem 0;
+  }.account-form-wrapper {
+    width: 100%;
+    height: auto;
+    background-color: #fdfdfd;
+    box-shadow: 0 1rem 8rem rgb(128 92 252);
+    z-index: 10;
+    border-radius: 1rem;
     display: flex;
     flex-direction: column;
-    background-color: #f8f9fa; /* Light gray background color */
-    border-radius: 8px; /* Rounded corners */
-    padding: 10px; /* Add padding */
-}
-
-.menu a {
-    text-decoration: none;
-    color: #333; /* Default text color */
-    font-size: 16px; /* Font size */
-    padding: 8px 15px; /* Add padding to each menu item */
-    margin-bottom: 5px; /* Add margin between menu items */
-    transition: background-color 0.3s, color 0.3s; /* Smooth transition */
-}
-
-.menu a:hover {
-    background-color: #007bff; /* Change background color on hover */
-    color: #fff; /* Change text color on hover */
-}
+    align-items: center;
+    padding: 1rem 2rem;
+  }.account-form-wrapper > span {
+    width: 9rem;
+    height: 9rem;
+    background-color: #afc8ff;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 6rem;
+    color: #3776ff;
+    margin-bottom: 3rem;
+  }.container {
+    display: grid;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+  }.account-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }.account-inputs input {
+    /* width: 40rem;
+    height: 5rem; */
+    background-color: #f0f2f4;
+    margin-bottom: 3rem;
+    border: none;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.6rem;
+    color: #444;
+  }.account-inputs input::placeholder {
+    color: #888;
+  }.account-check {
+    margin: -2rem 0 3rem 0;
+  }.account-check input {
+    cursor: pointer;
+  }.account-check label {
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: #777;
+    cursor: pointer;
+  }.account-form-wrapper button {
+    width: 230px;
+    height: 60px;
+    background-color: #70C6FF;
+    border: none;
+    border-radius: 25px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    margin: 0.5rem 0;
+    
+  }
+  .account-form-wrapper p {
+    font-size: 1.8rem;
+    font-weight: 300;
+    text-align: center;
+  }.account-form-wrapper p span {
+    color: #4d298f;
+    font-weight: 400;
+    cursor: pointer;
+  }.btn-out {
+    width: 35rem;
+    height: 5rem;
+    background: linear-gradient(to right, #ff48bf, #ff3393);
+    border: none;
+    border-radius: 4rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: #fff;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    margin-top: 4rem;
+  }/* Banner styles for all devices */
+  .banner {
+    position: absolute;
+    top: 15%;
+    left: 12%;
+    z-index: 10;
+  }.banner h1 {
+    font-family: "Mooli", cursive;
+    font-size: 30rem;
+    color: #fff;
+    text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.3);
+  }.banner h3 {
+    font-family: "Mooli", cursive;
+    font-size: 10rem;
+    top: 3000%;
+    font-weight: 100;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+    margin-left: 15rem; /* Add a space of 2rem between h3 and the left edge */
+  }/* Media Query for smaller devices like smartphones */
+  @media only screen and (max-width: 768px) {
+    .account {
+      scale: 1; /* Reset scale for smaller devices */
+      top: 50%; /* Adjust position */
+      left: 50%; /* Adjust position */
+      transform: translate(-50%, -50%);
+    }  .account-form-wrapper {
+      width: 90%; /* Adjust width */
+      height: auto; /* Adjust height */
+      padding: 2rem; /* Adjust padding */
+    }  .account-form-wrapper > span {
+      font-size: 4rem; /* Adjust font size */
+      margin-bottom: 2rem; /* Adjust margin */
+    }  .account-inputs input {
+      width: 100%; /* Adjust width */
+    }  /* Additional responsive adjustments */
+    /* .backgrounds div {
+      display: none; /* Hide backgrounds on smaller devices */  .banner {
+      display: none; /* Hide banner on smaller devices */
+    }
+  }.backgrounds {
+    width: 100%;
+    height: 100%;
+  }.bottom-image {
+    display: grid;
+    align-items: end;
+  }.account {
+    position: absolute;
+  }.logo > img {
+    width: 200px;
+    margin-bottom: 20px
+  }

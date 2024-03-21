@@ -31,7 +31,7 @@
       </div>
      <!-- Your component's template -->
 <input type="checkbox" [(ngModel)]="showTextArea"> Additional Context
-<textarea *ngIf="showTextArea" [(ngModel)]="textAreaInput"></textarea>
+<input *ngIf="showTextArea" [(ngModel)]="textAreaInput">
 
 
       <button (click)="findTeam(showTextArea,textAreaInput)">Find Team</button>  <button class="close-button" (click)="closePopup()">Close</button>
